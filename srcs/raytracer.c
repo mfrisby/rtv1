@@ -24,6 +24,24 @@ static t_ray    *init_ray(int x, int y, t_upleft *upleft, t_cam *cam, t_pix *pix
     return (ray);
 }
 
+static void  raytrace(t_ray *ray, t_cam *cam, t_mlx *mlx, int x, int y)
+{
+    float t1;
+    float t2;
+
+    //TODO
+    //parcourir chque objet
+    //recuperer la taille du rayon
+    //colorier le pixel de l'object le plus proche
+    t1 = calcul_plan(cam, ray);
+    t2 = calcul_sphere(cam, ray);
+    if (t1 > 0 && t1 > t2)
+         mlx_pixel_put(mlx->mlx, mlx->win, x, y, COLORRED);
+    else if (t2 > 0)
+        mlx_pixel_put(mlx->mlx, mlx->win, x, y, COLORBLUE);
+    //return (color);
+}
+
 void        rayloop(t_mlx *mlx, t_cam *cam, t_upleft *upleft, t_pix *pix)
 {
     int     x;
@@ -38,9 +56,7 @@ void        rayloop(t_mlx *mlx, t_cam *cam, t_upleft *upleft, t_pix *pix)
         while (x < WIDTH)
         {
             ray = init_ray(x, y, upleft, cam, pix);
-           // trace_ray();
-            calcul_sphere(cam, ray, mlx, x, y);
-            calcul_plan(cam, ray, mlx, x, y);
+            raytrace(ray, cam, mlx, x, y);
             x++;
         }
         y++;

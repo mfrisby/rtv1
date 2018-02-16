@@ -6,13 +6,14 @@ static t_plan        *init_plan()
 
     plan = malloc(sizeof(t_plan));
     //dir correspond au produit vectoriel (quon definit plutot que de calculer)
-    plan->dirx = 0.0f;
-    plan->diry = -1.0f;
-    plan->dirz = 0.0f;
+    //normale du plan
+    plan->dirx = -0.5f;
+    plan->diry = -0.2f;
+    plan->dirz = -3.0f;
     //pos correspond a un point quelquonc dans le plan 
-    plan->posx = 0.0f;
-    plan->posy = 1.0f;
-    plan->posz = 0.0f;
+    plan->posx = -0.2f;
+    plan->posy = -0.5f;
+    plan->posz = -0.2f;
     plan->color = COLORRED;
     return (plan);
 }
@@ -23,14 +24,14 @@ static t_sphere        *init_sphere()
 
     sphere = malloc(sizeof(t_sphere));
     sphere->x = 0;
-    sphere->y = 0.2;
-    sphere->z = 5;
-    sphere->r = 0.8;
+    sphere->y = 0;
+    sphere->z = -5.0f;
+    sphere->r = 0.4;
     sphere->color = COLORBLUE;
     return (sphere);
 }
 
-void        calcul_plan(t_cam *cam, t_ray *ray, t_mlx *mlx, int x, int y)
+float        calcul_plan(t_cam *cam, t_ray *ray)
 {
     float   d;
     float   t;
@@ -39,13 +40,10 @@ void        calcul_plan(t_cam *cam, t_ray *ray, t_mlx *mlx, int x, int y)
     plan = init_plan();
     d = -(plan->dirx * plan->posx + plan->diry * plan->posy + plan->dirz * plan->posz);
     t = -((plan->posx * cam->camx + plan->posy * cam->camy + plan->posz * cam->camz + d) / (plan->posx * ray->x + plan->posy * ray->y + plan->posz * ray->z));
-    if (t > 0)
-    {
-        mlx_pixel_put(mlx->mlx, mlx->win, x, y, plan->color);
-    }
+    return (t);
 }
 
-void    calcul_sphere(t_cam *cam, t_ray *ray, t_mlx *mlx, int x, int y)
+float    calcul_sphere(t_cam *cam, t_ray *ray)
 {
     int delta;
     float a;
@@ -54,37 +52,35 @@ void    calcul_sphere(t_cam *cam, t_ray *ray, t_mlx *mlx, int x, int y)
     float csx;
     float csy;
     float csz;
-    t_sphere *s;
+    t_sphere *sphere;
 
-    s = init_sphere();
-    csz = cam->camz - s->z;
-    csy= cam->camy - s->y;
-    csx = cam->camx - s->x;
+    sphere = init_sphere();
+    csz = cam->camz - sphere->z;
+    csy= cam->camy - sphere->y;
+    csx = cam->camx - sphere->x;
     a = (ray->x * ray->x) + (ray->y * ray->y) + (ray->z * ray->z);
-    b = 2 * (ray->x * (cam->camx - s->x) + ray->y * (cam->camy - s->y) + ray->z * (cam->camz - s->z));
-    c = (csx * csx) + (csy * csy) + (csz * csz) - (s->r * s->r);
+    b = 2 * (ray->x * (cam->camx - sphere->x) + ray->y * (cam->camy - sphere->y) + ray->z * (cam->camz - sphere->z));
+    c = (csx * csx) + (csy * csy) + (csz * csz) - (sphere->r * sphere->r);
     delta = (b * b) - 4 * a * c;
     b *= -1;
     if (delta > 0)
     {
-        //deux intersection, on prend la plus proche
         float t1 = (b + sqrt(delta)) / (2 * a);
         float t2 = (b - sqrt(delta)) / (2 * a);
-        //si t < 0 l'intersection est derriere la cam
-        if (t1 < t2 && t1 < 0)
-        {
-            mlx_pixel_put(mlx->mlx, mlx->win, x, y, s->color);
-        }
-        else if (t2 <= t1 && t2 < 0)
-        {
-            mlx_pixel_put(mlx->mlx, mlx->win, x, y, s->color);
-        }
+        if (t1 <=t2)
+            return (t1);
+        else
+            return (t2);
     }
     else if (delta == 0)
     {
-        //une seule intersection
         float t = b / (2 * a);
-        if (t > 0)
-            mlx_pixel_put(mlx->mlx, mlx->win, x, y, s->color);
+        return (t);
     }
+    return (-1);
 }
+
+//TODO
+//LST d'objets
+//objet file
+//parsing

@@ -45,7 +45,6 @@ void        init_space(t_cam *cam, t_pix **pix, t_upleft **upleft)
     (*pix)->yindent = (float)cam->fovh / (float)HEIGHT;
 }
 
-
 int     main(void)
 {
     t_mlx       *mlx;
@@ -62,5 +61,6 @@ int     main(void)
     init_space(cam, &pix, &upleft);
     rayloop(mlx, cam, upleft, pix);
     mlx_loop(mlx->mlx);
+    //TODO free all 
     return (0);
 }

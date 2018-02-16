@@ -90,7 +90,7 @@ typedef struct      s_mlx {
 }                   t_mlx;
 
 void        rayloop(t_mlx *mlx, t_cam *cam, t_upleft *upleft, t_pix *pix);
-void        calcul_sphere(t_cam *cam, t_ray *ray, t_mlx *mlx, int x, int y);
-void        calcul_plan(t_cam *cam, t_ray *ray, t_mlx *mlx, int x, int y);
+float        calcul_sphere(t_cam *cam, t_ray *ray);
+float        calcul_plan(t_cam *cam, t_ray *ray);
 
 #endif
