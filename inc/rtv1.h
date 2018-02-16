@@ -57,6 +57,16 @@ typedef struct      s_sphere {
     int               color;
 }                   t_sphere;
 
+typedef struct      s_plan {
+    float             dirx;
+    float             diry;
+    float             dirz;
+    float             posx;
+    float             posy;
+    float             posz;
+    int               color;
+}                   t_plan;
+
 typedef struct      s_upleft {
     float             x;
     float             y;
@@ -78,4 +88,9 @@ typedef struct      s_mlx {
     void            *mlx;
     void            *win;
 }                   t_mlx;
+
+void        rayloop(t_mlx *mlx, t_cam *cam, t_upleft *upleft, t_pix *pix);
+void        calcul_sphere(t_cam *cam, t_ray *ray, t_mlx *mlx, int x, int y);
+void        calcul_plan(t_cam *cam, t_ray *ray, t_mlx *mlx, int x, int y);
+
 #endif

@@ -1,6 +1,6 @@
 NAME =		rtv1
 
-SRCS = 		srcs/main.c
+SRCS = 		srcs/main.c srcs/objects.c srcs/raytracer.c
 
 INCLUDES = 	-I ./inc
 
