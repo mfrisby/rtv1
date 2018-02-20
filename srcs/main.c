@@ -1,35 +1,9 @@
 #include "../inc/rtv1.h"
 
-void    init_cam(t_cam **cam)
+void        init_mlx(t_data **data)
 {
-    (*cam) = malloc(sizeof(t_cam));
-    //origine
-    (*cam)->camx = 0.0f;
-    (*cam)->camy = 0.0f;
-    (*cam)->camz = 0.0f;
-    //vecdir
-    (*cam)->vdirx = 0.0f;
-    (*cam)->vdiry = 0.0f;
-    (*cam)->vdirz = -1.0f;
-    //vecright
-    (*cam)->vrightx = 1.0f;
-    (*cam)->vrighty = 0.0f;
-    (*cam)->vrightz = 0.0f;
-    //vecup
-    (*cam)->vupx = 0.0f;
-    (*cam)->vupy = 1.0f;
-    (*cam)->vupz = 0.0f;
-    //fov
-    (*cam)->fovh = 0.35f;
-    (*cam)->fovw = 0.5f;
-    (*cam)->fovd = 1.0f;
-}
-
-void        init_mlx(t_mlx **mlx)
-{
-    (*mlx) = malloc(sizeof(t_mlx));
-    (*mlx)->mlx = mlx_init();
-    (*mlx)->win = mlx_new_window((*mlx)->mlx, WIDTH, HEIGHT, "RTV1");
+    (*data)->mlx = mlx_init();
+    (*data)->win = mlx_new_window((*data)->mlx, WIDTH, HEIGHT, "RTV1");
 }
 
 void        init_space(t_cam *cam, t_pix **pix, t_upleft **upleft)
@@ -45,22 +19,28 @@ void        init_space(t_cam *cam, t_pix **pix, t_upleft **upleft)
     (*pix)->yindent = (float)cam->fovh / (float)HEIGHT;
 }
 
-int     main(void)
+int     main(int ac, char **av)
 {
-    t_mlx       *mlx;
-    t_cam       *cam;
-    t_upleft    *upleft;
-    t_pix       *pix;
+    t_data          *data;
+    t_upleft        *upleft;
+    t_pix           *pix;
     
-    mlx = NULL;
-    cam = NULL;
-    upleft = NULL;
     pix = NULL;
-    init_mlx(&mlx);
-    init_cam(&cam);
-    init_space(cam, &pix, &upleft);
-    rayloop(mlx, cam, upleft, pix);
-    mlx_loop(mlx->mlx);
-    //TODO free all 
+    upleft = NULL;
+    data = malloc(sizeof(t_data));
+    data->head = NULL;
+    if (ac < 2)
+    {
+        printf("File needed.");
+        return (0);
+    }
+    parse_file(av[1], &data);
+   // data->head->next = NULL;
+    init_mlx(&data);
+    init_space(data->cam, &pix, &upleft);
+    printf("cam: x %f y %f z %f \n", data->cam->camx, data->cam->camy, data->cam->camz);
+    printf("cam: dirx %f diry %f dirz %f\n", data->cam->vdirx, data->cam->vdiry, data->cam->vdirz);
+    rayloop(data, upleft, pix);
+    mlx_loop(data->mlx);
     return (0);
 }

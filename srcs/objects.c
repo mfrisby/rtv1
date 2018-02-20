@@ -1,49 +1,36 @@
 #include "../inc/rtv1.h"
 
-static t_plan        *init_plan()
-{
-    t_plan *plan;
+// static t_plan        *init_plan()
+// {
+//     t_plan *plan;
 
-    plan = malloc(sizeof(t_plan));
-    //dir correspond au produit vectoriel (quon definit plutot que de calculer)
-    //normale du plan
-    plan->dirx = -0.5f;
-    plan->diry = -0.2f;
-    plan->dirz = -3.0f;
-    //pos correspond a un point quelquonc dans le plan 
-    plan->posx = -0.2f;
-    plan->posy = -0.5f;
-    plan->posz = -0.2f;
-    plan->color = COLORRED;
-    return (plan);
-}
+//     plan = malloc(sizeof(t_plan));
+//     //dir correspond au produit vectoriel (quon definit plutot que de calculer)
+//     //normale du plan
+//     plan->dirx = -0.5f;
+//     plan->diry = -0.2f;
+//     plan->dirz = -3.0f;
+//     //pos correspond a un point quelquonc dans le plan 
+//     plan->posx = -0.2f;
+//     plan->posy = -0.5f;
+//     plan->posz = -0.2f;
+//     plan->color = COLORRED;
+//     return (plan);
+// }
 
-static t_sphere        *init_sphere()
-{
-    t_sphere    *sphere;
+// float        calcul_plan(t_cam *cam, t_ray *ray)
+// {
+//     float   d;
+//     float   t;
+//     t_plan *plan;
 
-    sphere = malloc(sizeof(t_sphere));
-    sphere->x = 0;
-    sphere->y = 0;
-    sphere->z = -5.0f;
-    sphere->r = 0.4;
-    sphere->color = COLORBLUE;
-    return (sphere);
-}
+//     plan = init_plan();
+//     d = -(plan->dirx * plan->posx + plan->diry * plan->posy + plan->dirz * plan->posz);
+//     t = -((plan->posx * cam->camx + plan->posy * cam->camy + plan->posz * cam->camz + d) / (plan->posx * ray->x + plan->posy * ray->y + plan->posz * ray->z));
+//     return (t);
+// }
 
-float        calcul_plan(t_cam *cam, t_ray *ray)
-{
-    float   d;
-    float   t;
-    t_plan *plan;
-
-    plan = init_plan();
-    d = -(plan->dirx * plan->posx + plan->diry * plan->posy + plan->dirz * plan->posz);
-    t = -((plan->posx * cam->camx + plan->posy * cam->camy + plan->posz * cam->camz + d) / (plan->posx * ray->x + plan->posy * ray->y + plan->posz * ray->z));
-    return (t);
-}
-
-float    calcul_sphere(t_cam *cam, t_ray *ray)
+float    calcul_sphere(t_cam *cam, t_ray *ray, t_sphere *sphere)
 {
     int delta;
     float a;
@@ -52,9 +39,7 @@ float    calcul_sphere(t_cam *cam, t_ray *ray)
     float csx;
     float csy;
     float csz;
-    t_sphere *sphere;
-
-    sphere = init_sphere();
+    
     csz = cam->camz - sphere->z;
     csy= cam->camy - sphere->y;
     csx = cam->camx - sphere->x;
@@ -79,8 +64,3 @@ float    calcul_sphere(t_cam *cam, t_ray *ray)
     }
     return (-1);
 }
-
-//TODO
-//LST d'objets
-//objet file
-//parsing
