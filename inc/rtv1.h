@@ -36,6 +36,7 @@
 #define CYLINDRE    3
 #define CONE        4
 #define CAM         5
+#define LIGHT       6
 
 typedef struct      s_cam {
     //origine
@@ -61,6 +62,7 @@ typedef struct      s_cam {
 }                   t_cam;
 
 typedef struct      s_light {
+    int                color[3];
     float           x;
     float           y;
     float           z;
@@ -69,22 +71,41 @@ typedef struct      s_light {
 }                   t_light;
 
 typedef struct          s_sphere {
+    int                color[3];
     float               x;
     float               y;
     float               z;
     float               r;
-    int                color[3];
     struct s_sphere     *next;
 }                       t_sphere;
 
+
+typedef struct          s_cylindre {
+    int                color[3];
+    float               x;
+    float               y;
+    float               z;
+    float               r;
+    struct s_cylindre     *next;
+}                       t_cylindre;
+
+typedef struct          s_cone {
+    int                color[3];
+    float               x;
+    float               y;
+    float               z;
+    float               r;
+    struct s_cone     *next;
+}                       t_cone;
+
 typedef struct          s_plan {
+    int                color[3];
+    float               x;
+    float               y;
+    float               z;
     float               dirx;
     float               diry;
     float               dirz;
-    float               posx;
-    float               posy;
-    float               posz;
-    long                color;
     struct s_plan       *next;
 }                       t_plan;
 
@@ -109,6 +130,8 @@ typedef struct              s_data {
     struct s_sphere         *sphere_head;
     struct s_light          *light_head;
     struct s_plan           *plan_head;
+    struct s_cone           *cone_head;
+    struct s_cylindre       *cylindre_head;
     struct s_cam            *cam;
     void                    *mlx;
     void                    *win;
@@ -116,16 +139,29 @@ typedef struct              s_data {
 
 //functions
 void                rayloop(t_data *data, t_upleft *upleft, t_pix *pix);
-float    calcul_sphere(t_cam *cam, t_ray *ray, t_sphere *sphere);
-//float               calcul_plan(t_cam *cam, t_ray *ray);
+float               calcul_sphere(t_cam *cam, t_ray *ray, t_sphere *sphere);
+float               calcul_plan(t_cam *cam, t_ray *ray, t_plan *plan);
 //parsing
 t_cam               *get_cam(char *s);
 t_sphere            *get_sphere(char *s);
+t_plan              *get_plan(char *s);
+t_cone              *get_cone(char *s);
+t_cylindre          *get_cylindre(char *s);
+t_light             *get_light(char *s);
 int                 parse_file(char *file, t_data **data);
-int                add_sphere_lst(t_data **data, t_sphere *elem);
-float               ft_getfloat(char *str);
+//lst
+int        add_cylindre_lst(t_data **data, t_cylindre *elem);
+int        add_cone_lst(t_data **data, t_cone *elem);
+int        add_sphere_lst(t_data **data, t_sphere *elem);
+int        add_plan_lst(t_data **data, t_plan *elem);
+int        add_light_lst(t_data **data, t_light *elem);
 //utils
-t_ray *normalize(float x, float y, float z);
-float get_dot(float ax, float ay, float az, float bx, float by, float bz);
+t_ray   *normalize(float x, float y, float z);
+float   get_dot(float ax, float ay, float az, float bx, float by, float bz);
+int     get_color(int r, int g, int b, float coef, float dot);
+//light
+int  get_light_at(float x, float y, float z, int *color, t_ray *intersection);
+t_ray *get_intersection(t_cam *cam, t_ray *ray, float d);
+
 
 #endif

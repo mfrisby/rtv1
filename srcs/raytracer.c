@@ -3,9 +3,7 @@
 static t_ray    *init_ray(int x, int y, t_upleft *upleft, t_cam *cam, t_pix *pix)
 {
     t_ray   *ray;
-
     float pixX = 0.0f;
- 
     float pixY = 0.0f;
     float pixZ = 0.0f;
 
@@ -16,92 +14,54 @@ static t_ray    *init_ray(int x, int y, t_upleft *upleft, t_cam *cam, t_pix *pix
     return (ray);
 }
 
-// static t_ray *get_intersection(t_cam *cam, t_ray *ray, float d)
-// {
-//     t_ray   *intersection;
-
-//     intersection = malloc(sizeof(t_ray));
-//     intersection->x = cam->camx + ray->x * d;
-//     intersection->y = cam->camy + ray->y * d;
-//     intersection->z = cam->camz + ray->z * d;
-//     return (intersection);
-// }
-
-// static int  get_light_at(t_sphere *sphere, t_ray *intersection, t_light *light)
-// {
-//     float dot;
-//     t_ray *r;
-//     t_ray *p;
-
-//     r = malloc(sizeof(t_ray));
-//     p = malloc(sizeof(t_ray));
-//     r->x = intersection->x -light->x;
-//     r->y = intersection->y - light->y;
-//     r->z = intersection->z - light->z;
-//     r = normalize(r->x, r->y, r->z);
-//     p->x = intersection->x - sphere->x;
-//     p->y = intersection->y - sphere->y;
-//     p->z = intersection->z - sphere->z;
-//     p = normalize(p->x, p->y, p->z);
-//     dot = get_dot(p->x, p->y, p->z, r->x, r->y, r->z);
-//     if (dot > 0)
-//     {
-//        // printf("dot: %f", dot);
-//         int c1 = (int)(sphere->color[0] * dot);
-//         int c2 = (int)(sphere->color[1] * dot);
-//         int c3 = (int)(sphere->color[2] * dot);
-//         return ((int)(((c1 & 0xff) << 16) + ((c2 & 0xff) << 8) + (c3 & 0xff)));
-//     }
-//     return (0);
-// }
-
-// static t_light *get_light()
-// {
-//     t_light *light;
-
-//     light = malloc(sizeof(t_light));
-//     light->x = 1.0f;
-//     light->y = 0.0f;
-//     light->z = 1.0f;
-//     light->coef = 1;
-//     return (light);
-// }
-
 static void  raytrace(t_ray *ray, t_data *data, int x, int y)
 {
+    int             color;
     float           max_d;
     float           d;
     t_sphere        *s;
-    t_sphere        *current;
-   // t_ray           *intersection;
-   // t_light         *light;
+    t_plan          *p;
+    float           xyz[3];
+    int             *rgb;
     
+    color = 0;
     max_d = 3.4028234664e+38;
     d = 0;
-    current = malloc(sizeof(t_sphere));
     s = data->sphere_head;
-    while (s)
+    p = data->plan_head;
+    while (s || p)
     {
-        d = calcul_sphere(data->cam, ray, s);
-        if (d > 0 && d < max_d)
+        if (s)
         {
-            max_d = d;
-            current = s;
+            d = calcul_sphere(data->cam, ray, s);
+            if (d > 0 && d < max_d)
+            {
+                max_d = d;
+                xyz[0] = s->x;
+                xyz[1] = s->y;
+                xyz[2] = s->z;
+                rgb = s->color;
+            }
+            s = s->next;
         }
-        s = s->next;
+        if (p)
+        {
+            d = calcul_plan(data->cam, ray, p);
+            if (d > 0 && d < max_d)
+            {
+                max_d = d;
+                xyz[0] = p->x;
+                xyz[1] = p->y;
+                xyz[2] = p->z;
+                rgb = p->color;
+            }
+            p = p->next;
+        }
     }
     if (max_d > 0 && max_d < 3.4028234664e+37)
     {
-        // if (!current)
-        // {
-        //     printf("NO CURRENT");
-        //     exit (0);
-        // }
-        // light = get_light();
-        // intersection = get_intersection(data->cam, ray, max_d);
-        // int color = get_light_at(current, intersection, light);
-        // color = 0;
-        mlx_pixel_put(data->mlx, data->win, x, y, COLORRED);
+        color = get_light_at(xyz[0], xyz[1], xyz[2], rgb, get_intersection(data->cam, ray, max_d));
+        mlx_pixel_put(data->mlx, data->win, x, y, color);
     }
 }
 

@@ -1,15 +1,15 @@
 #include "../inc/rtv1.h"
 
-static int get_pos(char *s, t_cone *cone)
+static int get_pos(char *s, t_light *light)
 {
     char **tab;
 
     tab = ft_strsplit(s, ',');
     if (!tab || !tab[0] || !tab[1] || !tab[2])
         return (-1);
-    cone->x = ft_getfloat(tab[0]);
-    cone->y = ft_getfloat(tab[1]);
-    cone->z = ft_getfloat(tab[2]);
+    light->x = ft_getfloat(tab[0]);
+    light->y = ft_getfloat(tab[1]);
+    light->z = ft_getfloat(tab[2]);
     free(tab[0]);
     free(tab[1]);
     free(tab[2]);
@@ -17,24 +17,7 @@ static int get_pos(char *s, t_cone *cone)
     return (0);
 }
 
-// static int get_dir(char *s, t_cone *cone)
-// {
-//     char **tab;
-
-//     tab = ft_strsplit(s, ',');
-//     if (!tab || !tab[0] || !tab[1] || !tab[2])
-//         return (-1);
-//     cone->dirx = ft_getfloat(tab[0]);
-//     cone->diry = ft_getfloat(tab[1]);
-//     cone->dirz = ft_getfloat(tab[2]);
-//     free(tab[0]);
-//     free(tab[1]);
-//     free(tab[2]);
-//     free(tab);
-//     return (0);
-// }
-
-static int get_col(char *s, t_cone *cone)
+static int get_col(char *s, t_light *light)
 {
     int     r;
     int     g;
@@ -47,16 +30,16 @@ static int get_col(char *s, t_cone *cone)
     r = ft_getnbr(tab[0]);
     g = ft_getnbr(tab[1]);
     b = ft_getnbr(tab[2]);
-    cone->color[0] = r;
-    cone->color[1] = g;
-    cone->color[2] = b;
+    light->color[0] = r;
+    light->color[1] = g;
+    light->color[2] = b;
     free(tab[0]);
     free(tab[1]);
     free(tab[2]);
     free(tab);
     return (0);
 }
-static int get_attribu(char **tab, int i, t_cone *cone)
+static int get_attribu(char **tab, int i, t_light *light)
 {
     char **tab2;
     
@@ -65,17 +48,14 @@ static int get_attribu(char **tab, int i, t_cone *cone)
         return (-1);
     if (ft_strcmp(tab2[0], "pos") == 0)
     {
-        if (get_pos(tab2[1], cone) == -1)
+        if (get_pos(tab2[1], light) == -1)
             return (-1);
     }
-    // else if (ft_strcmp(tab2[0], "dir") == 0)
-    // {
-    //     if (get_dir(tab2[1], cone) == -1)
-    //         return (-1);
-    // }
+    else if (ft_strcmp(tab2[0], "coef") == 0)
+        light->coef = ft_getfloat(tab2[1]);
     else if (ft_strcmp(tab2[0], "color") == 0)
     {
-        if (get_col(tab2[1], cone) == -1)
+        if (get_col(tab2[1], light) == -1)
             return (-1);
     }
     else
@@ -86,20 +66,20 @@ static int get_attribu(char **tab, int i, t_cone *cone)
     return (0);
 }
 
-t_cone      *get_cone(char *s)
+t_light      *get_light(char *s)
 {
     int i;
     char **tab;
-    t_cone *cone;
+    t_light *light;
 
     i = 0;
     tab = ft_strsplit(s, ';');
-    if (!tab || (cone = malloc(sizeof(t_cone))) == NULL)
+    if (!tab || (light = malloc(sizeof(t_light))) == NULL)
         return (NULL);
-    cone->next = NULL;
+    light->next = NULL;
     while (tab[i])
     {
-        if (get_attribu(tab, i, cone) == -1)
+        if (get_attribu(tab, i, light) == -1)
             return (NULL);
         i++;
     }
@@ -110,5 +90,5 @@ t_cone      *get_cone(char *s)
         i++;
     }
     free(tab);    
-    return (cone);
+    return (light);
 }

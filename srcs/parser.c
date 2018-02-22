@@ -5,14 +5,30 @@ static int get_object(char *s, int type, t_data **data)
     if (type == CAM)
         (*data)->cam = get_cam(s);
     else if (type == SPHERE)
+    {
         if ((add_sphere_lst(data, get_sphere(s))) == -1)
             return (-1);
-    // else if (ft_strcmp(current, "plan"))
-    //     get_plan()
-    // else if (ft_strcmp(current, "cylindre"))
-    //     get_cylindre();
-    // else if (ft_strcmp(current, "cone"))
-    //     get_cone();
+    }
+    else if (type == PLAN)
+    {
+        if ((add_plan_lst(data, get_plan(s))) == -1)
+            return (-1);
+    }
+    else if (type == CYLINDRE)
+    {
+        if ((add_cylindre_lst(data, get_cylindre(s))) == -1)
+            return (-1);
+    }
+    else if (type == CONE)
+    {
+        if ((add_cone_lst(data, get_cone(s))) == -1)
+            return (-1);
+    }
+    else if (type == LIGHT)
+    {
+        if ((add_light_lst(data, get_light(s))) == -1)
+            return (-1);
+    }
     return (0);
 }
 
@@ -28,6 +44,8 @@ static int parse(char *s, int *type, t_data **data)
         *type = CYLINDRE;
     else if (ft_strcmp(s, "[cone]") == 0)
         *type = CONE;
+    else if (ft_strcmp(s, "[light]") == 0)
+        *type = LIGHT;
     else if (*type != -1)
         return (get_object(s, *type, data));
     else
@@ -51,16 +69,6 @@ static int read_file(int fd, t_data **data)
         if (parse(buf, &type, data) == -1)
             return (-1);
     }
-    // if ((*data)->sphere_head != NULL)
-    // {
-    //     ft_putendl("ok");
-    //     ft_putnbr((*data)->sphere_head->color);
-    // }
-    // if ((*data)->sphere_head->next != NULL)
-    // {
-    //     ft_putendl("ok");
-    //     ft_putnbr((*data)->sphere_head->next->color);
-    // }
     return (0);
 }
 

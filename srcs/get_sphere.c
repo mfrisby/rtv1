@@ -17,7 +17,7 @@ static int get_pos(char *s, t_sphere *sphere)
     return (0);
 }
 
-static int get_color(char *s, t_sphere *sphere)
+static int get_col(char *s, t_sphere *sphere)
 {
     int     r;
     int     g;
@@ -54,11 +54,13 @@ static int get_attribu(char **tab, int i, t_sphere *sphere)
     }
     else if (ft_strcmp(tab2[0], "color") == 0)
     {
-        if (get_color(tab2[1], sphere) == -1)
+        if (get_col(tab2[1], sphere) == -1)
             return (-1);
     }
     else if (ft_strcmp(tab2[0], "rad") == 0)
         sphere->r = ft_getfloat(tab2[1]);
+    else
+        return (-1);
     free(tab2[0]);
     free(tab2[1]);
     free(tab2);
