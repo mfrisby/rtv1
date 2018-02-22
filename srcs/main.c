@@ -1,5 +1,19 @@
 #include "../inc/rtv1.h"
 
+t_data        *init_data()
+{
+    t_data      *data;
+
+    data = malloc(sizeof(t_data));
+    data->sphere_head = NULL;
+    data->plan_head = NULL;
+    data->light_head = NULL;
+    data->cam = NULL;
+    data->mlx = NULL;
+    data->win = NULL;
+    return (data);
+}
+
 void        init_mlx(t_data **data)
 {
     (*data)->mlx = mlx_init();
@@ -25,21 +39,21 @@ int     main(int ac, char **av)
     t_upleft        *upleft;
     t_pix           *pix;
     
-    pix = NULL;
-    upleft = NULL;
-    data = malloc(sizeof(t_data));
-    data->head = NULL;
     if (ac < 2)
     {
-        printf("File needed.");
+        ft_putendl("File needed.");
         return (0);
     }
-    parse_file(av[1], &data);
-   // data->head->next = NULL;
+    pix = NULL;
+    upleft = NULL;
+    data = init_data();
+    if  (parse_file(av[1], &data) == -1)
+    {
+        ft_putendl("problem while parsing file.");
+        return (-1);
+    }
     init_mlx(&data);
     init_space(data->cam, &pix, &upleft);
-    printf("cam: x %f y %f z %f \n", data->cam->camx, data->cam->camy, data->cam->camz);
-    printf("cam: dirx %f diry %f dirz %f\n", data->cam->vdirx, data->cam->vdiry, data->cam->vdirz);
     rayloop(data, upleft, pix);
     mlx_loop(data->mlx);
     return (0);

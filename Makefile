@@ -1,7 +1,8 @@
 NAME =		rtv1
 
 SRCS = 		srcs/main.c srcs/objects.c srcs/raytracer.c srcs/parser.c \
-			srcs/get_cam.c srcs/get_sphere.c srcs/lst.c
+			srcs/get_cam.c srcs/get_sphere.c srcs/lst.c srcs/ft_getfloat.c \
+			srcs/utils.c
 
 INCLUDES = 	-I ./inc
 

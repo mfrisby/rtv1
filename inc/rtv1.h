@@ -60,30 +60,33 @@ typedef struct      s_cam {
     float           fovd;
 }                   t_cam;
 
-typedef struct      s_objects {
-    long                 color;
-    int                 type;
-    void                *ptr;
-    struct s_objects    *next;
-}                   t_objects;
+typedef struct      s_light {
+    float           x;
+    float           y;
+    float           z;
+    float           coef;
+    struct s_light  *next;
+}                   t_light;
 
-typedef struct      s_sphere {
-    float             x;
-    float             y;
-    float             z;
-    float             r;
-    long               color;
-}                   t_sphere;
+typedef struct          s_sphere {
+    float               x;
+    float               y;
+    float               z;
+    float               r;
+    int                color[3];
+    struct s_sphere     *next;
+}                       t_sphere;
 
-typedef struct      s_plan {
-    float             dirx;
-    float             diry;
-    float             dirz;
-    float             posx;
-    float             posy;
-    float             posz;
-    long               color;
-}                   t_plan;
+typedef struct          s_plan {
+    float               dirx;
+    float               diry;
+    float               dirz;
+    float               posx;
+    float               posy;
+    float               posz;
+    long                color;
+    struct s_plan       *next;
+}                       t_plan;
 
 typedef struct      s_upleft {
     float             x;
@@ -103,7 +106,9 @@ typedef struct              s_pix {
 }                           t_pix;
 
 typedef struct              s_data {
-    struct s_objects        *head;
+    struct s_sphere         *sphere_head;
+    struct s_light          *light_head;
+    struct s_plan           *plan_head;
     struct s_cam            *cam;
     void                    *mlx;
     void                    *win;
@@ -111,13 +116,16 @@ typedef struct              s_data {
 
 //functions
 void                rayloop(t_data *data, t_upleft *upleft, t_pix *pix);
-float               calcul_sphere(t_cam *cam, t_ray *ray, t_sphere *sphere);
-float               calcul_sphere2(t_cam *cam, t_ray *ray);
+float    calcul_sphere(t_cam *cam, t_ray *ray, t_sphere *sphere);
 //float               calcul_plan(t_cam *cam, t_ray *ray);
 //parsing
 t_cam               *get_cam(char *s);
 t_sphere            *get_sphere(char *s);
 int                 parse_file(char *file, t_data **data);
-void                add_elem(t_data **data, void *elem, int type);
+int                add_sphere_lst(t_data **data, t_sphere *elem);
+float               ft_getfloat(char *str);
+//utils
+t_ray *normalize(float x, float y, float z);
+float get_dot(float ax, float ay, float az, float bx, float by, float bz);
 
 #endif

@@ -1,40 +1,21 @@
 #include "../inc/rtv1.h"
 
-static void add_first(t_data **data, void *elem, int type)
+int        add_sphere_lst(t_data **data, t_sphere *elem)
 {
-    t_sphere *myptr;
+    t_sphere *tmp;
 
-    (*data)->head = malloc(sizeof(t_objects));
-    (*data)->head->next = NULL;
-    (*data)->head->ptr = elem;
-    (*data)->head->type = type;
-    if (type == SPHERE)
+    if (elem == NULL)
+        return (-1);
+    if ((*data)->sphere_head == NULL)
     {
-        myptr = elem;
-        (*data)->head->color = myptr->color;
+        (*data)->sphere_head = elem;
+        return (0);
     }
-}
-
-void        add_elem(t_data **data, void *elem, int type)
-{
-    t_objects *tmp;
-    t_sphere *myptr;
-
-    tmp = NULL;
-    if ((*data)->head == NULL)
-        add_first(data, elem, type);
-    else
+    tmp = (*data)->sphere_head;
+    while (tmp->next)
     {
-        tmp = (*data)->head;
-        while (tmp->next)
-        {
-            tmp = tmp->next;
-        }
-        myptr = elem;
-        tmp->next = malloc(sizeof(t_objects));
-        tmp->next->ptr = elem;
-        tmp->next->type = type;
-        tmp->color = myptr->color;
-        tmp->next->next = NULL;
+        tmp = tmp->next;   
     }
+    tmp->next = elem;
+    return (0);
 }

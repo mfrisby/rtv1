@@ -2,10 +2,8 @@
 pos:0,0,0;dir:0,0,-1
 #comment
 [sphere]
-pos:-2,-2,-14;rad:2;color:28,167,21
-[sphere]
-pos:-30,7,-17;rad:2;color:55,19,159
-[sphere]
-pos:30,-5,-17;rad:2;color:144,12,63
-[sphere]
-pos:10,5,-7;rad:1;color:144,12,63
+pos:0.3,0.5,-4;rad:0.3;color:28,167,21
+#[sphere]
+#pos:-0.3,-0.7,-10;rad:2;color:55,19,159
+#[sphere]
+#pos:3,-5,-5;rad:2;color:144,12,63

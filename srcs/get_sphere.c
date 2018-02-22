@@ -6,15 +6,10 @@ static int get_pos(char *s, t_sphere *sphere)
 
     tab = ft_strsplit(s, ',');
     if (!tab || !tab[0] || !tab[1] || !tab[2])
-    {
-        ft_putendl(s);
         return (-1);
-    }
-    sphere->x = ft_getnbr(tab[0]);
-    sphere->y = ft_getnbr(tab[1]);
-    sphere->z = ft_getnbr(tab[2]);
-    sphere->x /= 10.0f;
-    sphere->y /= 10.0f;
+    sphere->x = ft_getfloat(tab[0]);
+    sphere->y = ft_getfloat(tab[1]);
+    sphere->z = ft_getfloat(tab[2]);
     free(tab[0]);
     free(tab[1]);
     free(tab[2]);
@@ -35,7 +30,9 @@ static int get_color(char *s, t_sphere *sphere)
     r = ft_getnbr(tab[0]);
     g = ft_getnbr(tab[1]);
     b = ft_getnbr(tab[2]);
-    sphere->color = ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
+    sphere->color[0] = r;
+    sphere->color[1] = g;
+    sphere->color[2] = b;
     free(tab[0]);
     free(tab[1]);
     free(tab[2]);
@@ -43,37 +40,49 @@ static int get_color(char *s, t_sphere *sphere)
     return (0);
 }
 
+static int get_attribu(char **tab, int i, t_sphere *sphere)
+{
+    char **tab2;
+
+    tab2 = ft_strsplit(tab[i], ':');
+    if (!tab2 || !tab2[0] || !tab2[1])
+        return (-1);
+    if (ft_strcmp(tab2[0], "pos") == 0)
+    {
+        if (get_pos(tab2[1], sphere) == -1)
+            return (-1);
+    }
+    else if (ft_strcmp(tab2[0], "color") == 0)
+    {
+        if (get_color(tab2[1], sphere) == -1)
+            return (-1);
+    }
+    else if (ft_strcmp(tab2[0], "rad") == 0)
+        sphere->r = ft_getfloat(tab2[1]);
+    free(tab2[0]);
+    free(tab2[1]);
+    free(tab2);
+    return (0);
+}
+
 t_sphere *get_sphere(char *s)
 {
     int i;
     char **tab;
-    char **tab2;
     t_sphere *sphere;
 
     i = 0;
     tab = ft_strsplit(s, ';');
     if (!tab)
         return (NULL);
-    sphere = malloc(sizeof(t_sphere));
+    if ((sphere = malloc(sizeof(t_sphere))) == NULL)
+        return (NULL);
+    sphere->next = NULL;
     while (tab[i])
     {
-        tab2 = ft_strsplit(tab[i], ':');
-        if (ft_strcmp(tab2[0], "pos") == 0)
-        {
-            if (get_pos(tab2[1], sphere) == -1)
-                return (NULL);
-        }
-        else if (ft_strcmp(tab2[0], "color") == 0)
-        {
-            if (get_color(tab2[1], sphere) == -1)
-                return (NULL);
-        }
-        else if (ft_strcmp(tab2[0], "rad") == 0)
-            sphere->r = ft_getnbr(tab2[1]);
+        if (get_attribu(tab, i, sphere) == -1)
+            return (NULL);
         i++;
-        free(tab2[0]);
-        free(tab2[1]);
-        free(tab2);
     }
     i = 0;
     while (tab[i])
