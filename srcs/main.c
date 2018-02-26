@@ -4,9 +4,10 @@ t_data        *init_data()
 {
     t_data      *data;
 
+    ft_putendl("Init data struct.");
     if ((data = malloc(sizeof(t_data))) == NULL)
     {
-        ft_putendl(strerror(errno));
+        ft_printf("\033[0;31mError: %s\033[0m",strerror(errno));
         exit (0);
     }
     data->sphere_head = NULL;
@@ -22,19 +23,24 @@ t_data        *init_data()
 
 void        init_mlx(t_data **data)
 {
+    ft_putendl("Init mlx.");
     (*data)->mlx = mlx_init();
     (*data)->win = mlx_new_window((*data)->mlx, WIDTH, HEIGHT, "RTV1");
     if (!(*data)->mlx || !(*data)->win)
     {
-        ft_putendl("MLX init error.");
+        ft_putendl("\033[0;33mMLX init error.\033[0m");
         exit (0);
     }
 }
 
 void        init_space(t_cam *cam, t_pix **pix, t_upleft **upleft)
 {
-    (*upleft) = malloc(sizeof(t_upleft));
-    (*pix) = malloc(sizeof(t_pix));
+    ft_putendl("Init camera.");
+    if (((*upleft) = malloc(sizeof(t_upleft))) == NULL || ((*pix) = malloc(sizeof(t_pix))) == NULL)
+    {
+        ft_printf("\033[0;31mError: %s\033[0m",strerror(errno));
+        exit (0);
+    }
     (*upleft)->x = cam->camx + ((cam->vdirx * cam->fovd) + (cam->vupx * (cam->fovh / 2.0f))) - (cam->vrightx * (cam->fovw / 2.0f));
     (*upleft)->y = cam->camy + ((cam->vdiry * cam->fovd) + (cam->vupy * (cam->fovh / 2.0f))) - (cam->vrighty * (cam->fovw / 2.0f));
     (*upleft)->z = cam->camz + ((cam->vdirz * cam->fovd) + (cam->vupz * (cam->fovh / 2.0f))) - (cam->vrightz * (cam->fovw / 2.0f));
@@ -63,6 +69,7 @@ int     main(int ac, char **av)
     }
     init_mlx(&data);
     init_space(data->cam, &pix, &upleft);
+    ft_putendl("\033[0;32mInit OK; Please use escape key to quit.\033[0m");
     rayloop(data, upleft, pix);
     mlx_loop(data->mlx);
     free_heads(data);

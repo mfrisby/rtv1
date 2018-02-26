@@ -6,7 +6,7 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 17:08:14 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/02/26 11:55:59 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/02/26 15:05:32 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@
 #define CONE 4
 #define CAM 5
 #define LIGHT 6
+#define INIT    42
+#define NOTINIT -42
 
 typedef struct s_cam
 {
@@ -60,6 +62,7 @@ typedef struct s_cam
     float fovh;
     float fovw;
     float fovd;
+    int     is_init;
 } t_cam;
 
 typedef struct s_light
@@ -89,6 +92,9 @@ typedef struct s_cylindre
     float y;
     float z;
     float r;
+    float dirx;
+    float diry;
+    float dirz;
     struct s_cylindre *next;
 } t_cylindre;
 

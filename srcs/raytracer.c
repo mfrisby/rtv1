@@ -99,7 +99,7 @@ static float while_cylindre(t_data *data, t_ray *ray, float *xyz, int **rgb, flo
         {
             max_d = d;
             xyz[0] = c->x;
-            xyz[1] = c->y;
+            xyz[1] = 0;//fix lumiere temporaire
             xyz[2] = c->z;
             *rgb = c->color;
         }

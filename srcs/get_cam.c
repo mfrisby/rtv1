@@ -46,6 +46,7 @@ t_cam *get_cam(char *s)
 
     i = 0;
     cam = malloc(sizeof(t_cam));
+    cam->is_init = NOTINIT;
     tab = ft_strsplit(s, ';');
     while (tab[i])
     {
@@ -77,5 +78,6 @@ t_cam *get_cam(char *s)
     cam->fovh = 0.35f;
     cam->fovw = 0.5f;
     cam->fovd = 1.0f;
+    cam->is_init = INIT;
     return (cam);
 }

@@ -64,6 +64,7 @@ float    calcul_cylindre(t_cam *cam, t_ray *ray, t_cylindre *cy)
     float t1;
     float t2;
 
+
     a = pow(ray->x, 2) + pow(ray->z, 2);
     b = 2 * (ray->x * (cam->camx - cy->x) + ray->z * (cam->camz - cy->z));
     c = (pow(cam->camx - cy->x, 2) + pow(cam->camz - cy->z, 2) - pow(cy->r, 2));

@@ -6,7 +6,7 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 17:04:58 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/02/26 12:02:44 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/02/26 14:45:51 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,7 @@ static int read_file(int fd, t_data **data)
             continue;
         if (parse(buf, &type, data) == -1)
             continue;
-        ft_strdel(&buf);
     }
-    ft_strdel(&buf);
     return (0);
 }
 
@@ -93,8 +91,7 @@ static int  open_file(char *file)
     fd = open(file, O_RDONLY);
     if (fd == -1)
     {
-        ft_putendl("lol");
-        ft_putendl(strerror(errno));
+        ft_printf("\033[0;31mError: %s\033[0m",strerror(errno));
         exit (0);
     }
     return (fd);
@@ -103,13 +100,20 @@ static int  open_file(char *file)
 int    parse_file(char *file, t_data **data)
 {
     int fd;
-    t_cam *cam;
     
-    cam = malloc(sizeof(t_cam));
-    if (!cam || !file || ft_strlen(file) <= 0)
+    ft_putendl("Parse file.");
+    if (!file || ft_strlen(file) <= 0)
         return (-1);
     fd = open_file(file);
     if (read_file(fd, data) == -1)
         return (-1);
+    if ((*data)->cam == NULL || (*data)->cam->is_init == NOTINIT)
+    {
+        ft_putendl("\033[0;31mError : you need to add cam in your config file; Format:\033[0m");
+        ft_putendl("[cam]\npos:x,y,z;dir:x,y,z");
+        exit(0);
+    }
+    if ((*data)->light_head == NULL)
+        ft_putendl("\033[0;33mWarning: no light in config file.\033[0m");
     return (0);
 }

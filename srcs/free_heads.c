@@ -59,7 +59,7 @@ static void    free_heads_objects(t_data *data)
 
 void    free_heads(t_data *data)
 {
-    ft_putendl("freeing");
+    ft_putendl("Freeing structs");
     t_light *light;
     t_light *tmp;
 
