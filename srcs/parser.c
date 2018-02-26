@@ -6,7 +6,7 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 17:04:58 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/02/22 17:06:29 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/02/26 12:02:44 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,10 @@ static int read_file(int fd, t_data **data)
         else if (buf[0] == '#')
             continue;
         if (parse(buf, &type, data) == -1)
-            return (-1);
+            continue;
+        ft_strdel(&buf);
     }
+    ft_strdel(&buf);
     return (0);
 }
 
@@ -89,6 +91,12 @@ static int  open_file(char *file)
     int fd;
     
     fd = open(file, O_RDONLY);
+    if (fd == -1)
+    {
+        ft_putendl("lol");
+        ft_putendl(strerror(errno));
+        exit (0);
+    }
     return (fd);
 }
 
@@ -101,8 +109,6 @@ int    parse_file(char *file, t_data **data)
     if (!cam || !file || ft_strlen(file) <= 0)
         return (-1);
     fd = open_file(file);
-    if (fd == -1)
-        return (-1);
     if (read_file(fd, data) == -1)
         return (-1);
     return (0);

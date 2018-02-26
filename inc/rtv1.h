@@ -6,7 +6,7 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 17:08:14 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/02/26 11:02:36 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/02/26 11:55:59 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <errno.h>
 
 #define WIDTH 500
 #define HEIGHT 350
@@ -170,6 +171,7 @@ int add_light_lst(t_data **data, t_light *elem);
 //utils
 t_ray *normalize(float x, float y, float z);
 float get_dot(float ax, float ay, float az, float bx, float by, float bz);
+void    free_heads(t_data *data);
 //light
 int get_light_at(float x, float y, float z, int *color, t_ray *intersection, t_light *light);
 t_ray *get_intersection(t_cam *cam, t_ray *ray, float d);

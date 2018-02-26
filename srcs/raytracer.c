@@ -135,6 +135,15 @@ static void raytrace(t_ray *ray, t_data *data, int x, int y)
         }
     }
 }
+static int	key_hook(int keycode, t_data *data)
+{
+	if (keycode == 53)
+	{
+        free_heads(data);
+		exit(0);
+	}
+	return (0);
+}
 
 void rayloop(t_data *data, t_upleft *upleft, t_pix *pix)
 {
@@ -149,6 +158,8 @@ void rayloop(t_data *data, t_upleft *upleft, t_pix *pix)
         x = 0;
         while (x < WIDTH)
         {
+
+		    mlx_hook(data->win, 3, 3, key_hook, data);
             ray = init_ray(x, y, upleft, data->cam, pix);
             raytrace(ray, data, x, y);
             x++;

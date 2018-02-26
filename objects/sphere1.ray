@@ -8,7 +8,7 @@ pos:-0.3,0.2,-2;rad:0.2;color:144,12,63
 [sphere]
 pos:0,0,-5;rad:0.3;color:28,167,21
 [sphere]
-pos:0.3,-0.2,-5;rad:0.2;color:55,19,159
+pos:0.3,-0.2,-5;m:0.2;color:55,19,159
 [sphere]
 pos:0.4,0.2,-3;rad:0.1;color:246,255,0
 [plan]
