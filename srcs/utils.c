@@ -32,11 +32,12 @@ int     get_color(int r, int g, int b, float coef, float dot)
             b = minb;
         return ((int)(((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff)));
     }
-    return (0);
-    // r *= 0.2f;
-    // g *= 0.2f;
-    // b *= 0.2f;
-    // return ((int)(((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff)));
+    //    return (0);
+    //lumiere ambiance
+    r *= 0.2f;
+    g *= 0.2f;
+    b *= 0.2f;
+    return ((int)(((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff)));
 }
 
 float get_dot(float ax, float ay, float az, float bx, float by, float bz)

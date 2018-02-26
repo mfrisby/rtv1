@@ -18,6 +18,7 @@ t_data        *init_data()
     data->cam = NULL;
     data->mlx = NULL;
     data->win = NULL;
+    data->current = NULL;
     return (data);
 }
 

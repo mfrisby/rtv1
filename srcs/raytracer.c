@@ -31,6 +31,7 @@ static float while_cone(t_data *data, t_ray *ray, float *xyz, int **rgb, float m
             xyz[1] = c->y;
             xyz[2] = c->z;
             *rgb = c->color;
+            data->current = c; 
         }
         c = c->next;
     }
@@ -56,6 +57,7 @@ static float while_sphere(t_data *data, t_ray *ray, float *xyz, int **rgb)
             xyz[1] = s->y;
             xyz[2] = s->z;
             *rgb = s->color;
+            data->current = s; 
         }
         s = s->next;
     }
@@ -65,22 +67,23 @@ static float while_sphere(t_data *data, t_ray *ray, float *xyz, int **rgb)
 static float while_plan(t_data *data, t_ray *ray, float *xyz, int **rgb, float max_d)
 {
     float d;
-    t_plan *s;
+    t_plan *p;
 
     d = 0;
-    s = data->plan_head;
-    while (s)
+    p = data->plan_head;
+    while (p)
     {
-        d = calcul_plan(data->cam, ray, s);
+        d = calcul_plan(data->cam, ray, p);
         if (d > 0 && d < max_d)
         {
             max_d = d;
-            xyz[0] = s->x;
-            xyz[1] = s->y;
-            xyz[2] = s->z;
-            *rgb = s->color;
+            xyz[0] = p->x;
+            xyz[1] = p->y;
+            xyz[2] = p->z;
+            *rgb = p->color;
+            data->current = p;
         }
-        s = s->next;
+        p = p->next;
     }
     return (max_d);
 }
@@ -102,6 +105,7 @@ static float while_cylindre(t_data *data, t_ray *ray, float *xyz, int **rgb, flo
             xyz[1] = 0;//fix lumiere temporaire
             xyz[2] = c->z;
             *rgb = c->color;
+            data->current = c;
         }
         c = c->next;
     }
@@ -127,12 +131,13 @@ static void raytrace(t_ray *ray, t_data *data, int x, int y)
     max_d = while_cone(data, ray, xyz, &rgb, max_d);
     if (max_d > 0 && max_d < 3.4028234664e+37)
     {
-        while (l)
-        {
-            color = get_light_at(xyz[0], xyz[1], xyz[2], rgb, get_intersection(data->cam, ray, max_d), l);
+        //multispot
+        //while (l)
+        //{
+            color = get_light_at(xyz, rgb, get_intersection(data->cam, ray, max_d), l, data);
             mlx_pixel_put(data->mlx, data->win, x, y, color);
-            l = l->next;
-        }
+         //   l = l->next;
+       // }
     }
 }
 static int	key_hook(int keycode, t_data *data)

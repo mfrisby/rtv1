@@ -6,7 +6,7 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 17:04:58 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/02/26 14:45:51 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/02/26 16:59:54 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ static int  open_file(char *file)
     if (fd == -1)
     {
         ft_printf("\033[0;31mError: %s\033[0m",strerror(errno));
-        exit (0);
+        exit(0);
     }
     return (fd);
 }
