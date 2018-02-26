@@ -21,7 +21,7 @@ static int     get_light_colision(t_ray *i, t_ray *r, t_data *data)
     t_cone *cone;
     t_sphere *sphere;
     t_cylindre *cylindre;
-    // t_plan *plan;
+    t_plan *plan;
 
     fakecam = malloc(sizeof(t_cam));
     fakecam->camx = i->x;
@@ -48,13 +48,13 @@ static int     get_light_colision(t_ray *i, t_ray *r, t_data *data)
             return(-1);
         cylindre = cylindre->next;
     }
-    // plan = data->plan_head;
-    // while (plan)
-    // {
-    //     if (plan != data->current && calcul_plan(fakecam,r,plan) != -1)
-    //         return(-1);
-    //     plan = plan->next;
-    // }
+    plan = data->plan_head;
+    while (plan)
+    {
+        if (plan != data->current && calcul_plan(fakecam,r,plan) > 0)
+            return(-1);
+        plan = plan->next;
+    }
      return (0);
 }
 
@@ -80,7 +80,7 @@ int  get_light_at(float *xyz, int *color, t_ray *intersection, t_light *light, t
     r->z = light->z - intersection->z;
     r = normalize(r->x, r->y, r->z);
     if ((get_light_colision(intersection, r, data)) == -1)
-        return (0);
+        return (get_color(color[0], color[1], color[2], 0.8f, 0));//ombre lumiere ambiance
     dot = get_dot(p->x, p->y, p->z, r->x, r->y, r->z);
     return (get_color(color[0], color[1], color[2], 0.8f, dot));
 }
