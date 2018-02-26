@@ -11,18 +11,12 @@ t_ray *get_intersection(t_cam *cam, t_ray *ray, float d)
     return (intersection);
 }
 
-int  get_light_at(float x, float y, float z, int *color, t_ray *intersection)
+int  get_light_at(float x, float y, float z, int *color, t_ray *intersection, t_light *light)
 {
     float dot;
     t_ray *r;
     t_ray *p;
-    t_light *light;
-
-    light = malloc(sizeof(t_light));
-    light->x = 0.2f;
-    light->y = 0.2f;
-    light->z = -1.0f;
-    light->coef = 1;
+    
     r = malloc(sizeof(t_ray));
     p = malloc(sizeof(t_ray));
     r->x = light->x- intersection->x;
@@ -34,5 +28,6 @@ int  get_light_at(float x, float y, float z, int *color, t_ray *intersection)
     p->z = intersection->z - z;
     p = normalize(p->x, p->y, p->z);
     dot = get_dot(p->x, p->y, p->z, r->x, r->y, r->z);
-    return (get_color(color[0], color[1], color[2], 0.2f, dot));
+    return (get_color(color[0], color[1], color[2], 0.8f, dot));
 }
+

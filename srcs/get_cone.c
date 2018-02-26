@@ -17,23 +17,6 @@ static int get_pos(char *s, t_cone *cone)
     return (0);
 }
 
-// static int get_dir(char *s, t_cone *cone)
-// {
-//     char **tab;
-
-//     tab = ft_strsplit(s, ',');
-//     if (!tab || !tab[0] || !tab[1] || !tab[2])
-//         return (-1);
-//     cone->dirx = ft_getfloat(tab[0]);
-//     cone->diry = ft_getfloat(tab[1]);
-//     cone->dirz = ft_getfloat(tab[2]);
-//     free(tab[0]);
-//     free(tab[1]);
-//     free(tab[2]);
-//     free(tab);
-//     return (0);
-// }
-
 static int get_col(char *s, t_cone *cone)
 {
     int     r;
@@ -68,11 +51,8 @@ static int get_attribu(char **tab, int i, t_cone *cone)
         if (get_pos(tab2[1], cone) == -1)
             return (-1);
     }
-    // else if (ft_strcmp(tab2[0], "dir") == 0)
-    // {
-    //     if (get_dir(tab2[1], cone) == -1)
-    //         return (-1);
-    // }
+    else if (ft_strcmp(tab2[0], "rad") == 0)
+        cone->r = ft_getfloat(tab2[1]);
     else if (ft_strcmp(tab2[0], "color") == 0)
     {
         if (get_col(tab2[1], cone) == -1)
@@ -94,7 +74,9 @@ t_cone      *get_cone(char *s)
 
     i = 0;
     tab = ft_strsplit(s, ';');
-    if (!tab || (cone = malloc(sizeof(t_cone))) == NULL)
+    if (!tab)
+        return (NULL);
+    if ((cone = malloc(sizeof(t_cone))) == NULL)
         return (NULL);
     cone->next = NULL;
     while (tab[i])

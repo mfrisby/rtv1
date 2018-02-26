@@ -7,6 +7,8 @@ t_data        *init_data()
     data = malloc(sizeof(t_data));
     data->sphere_head = NULL;
     data->plan_head = NULL;
+    data->cone_head = NULL;
+    data->cylindre_head = NULL;
     data->light_head = NULL;
     data->cam = NULL;
     data->mlx = NULL;

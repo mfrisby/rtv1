@@ -17,23 +17,6 @@ static int get_pos(char *s, t_cylindre *cylindre)
     return (0);
 }
 
-// static int get_dir(char *s, t_cylindre *cylindre)
-// {
-//     char **tab;
-
-//     tab = ft_strsplit(s, ',');
-//     if (!tab || !tab[0] || !tab[1] || !tab[2])
-//         return (-1);
-//     cylindre->dirx = ft_getfloat(tab[0]);
-//     cylindre->diry = ft_getfloat(tab[1]);
-//     cylindre->dirz = ft_getfloat(tab[2]);
-//     free(tab[0]);
-//     free(tab[1]);
-//     free(tab[2]);
-//     free(tab);
-//     return (0);
-// }
-
 static int get_col(char *s, t_cylindre *cylindre)
 {
     int     r;
@@ -68,18 +51,18 @@ static int get_attribu(char **tab, int i, t_cylindre *cylindre)
         if (get_pos(tab2[1], cylindre) == -1)
             return (-1);
     }
-    // else if (ft_strcmp(tab2[0], "dir") == 0)
-    // {
-    //     if (get_dir(tab2[1], cylindre) == -1)
-    //         return (-1);
-    // }
+    else if (ft_strcmp(tab2[0], "rad") == 0)
+        cylindre->r = ft_getfloat(tab2[1]);
     else if (ft_strcmp(tab2[0], "color") == 0)
     {
         if (get_col(tab2[1], cylindre) == -1)
             return (-1);
     }
     else
+    {
+        ft_putchar('x');
         return (-1);
+    }
     free(tab2[0]);
     free(tab2[1]);
     free(tab2);
@@ -94,7 +77,9 @@ t_cylindre      *get_cylindre(char *s)
 
     i = 0;
     tab = ft_strsplit(s, ';');
-    if (!tab || (cylindre = malloc(sizeof(t_cylindre))) == NULL)
+    if (!tab)
+        return (NULL);
+    if ((cylindre = malloc(sizeof(t_cylindre))) == NULL)
         return (NULL);
     cylindre->next = NULL;
     while (tab[i])

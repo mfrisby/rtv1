@@ -28,6 +28,60 @@ float        calcul_plan(t_cam *cam, t_ray *ray, t_plan *plan)
     return (t);
 }
 
+float    calcul_cone(t_cam *cam, t_ray *ray, t_cone *cone)
+{
+    float delta;
+    float a;
+    float b;
+    float c;
+    float t1;
+    float t2;
+
+    a = pow(ray->x, 2) + pow(ray->z, 2) - pow(ray->y, 2);
+    b = 2 * (ray->x * (cam->camx - cone->x) + ray->z * (cam->camz - cone->z) - ray->y * (cam->camy - cone->y));
+    c = (pow(cam->camx - cone->x, 2) + pow(cam->camz - cone->z, 2) - pow(cam->camy - cone->y, 2) - pow(cone->r, 2));
+    delta = (b * b) - 4 * a * c;
+    b = -b;
+    if (delta > 0.0f)
+    {
+        t1 = (b + sqrt(delta)) / (2 * a);
+        t2 = (b - sqrt(delta)) / (2 * a);
+        if (t1 <= t2)
+            return (t1);
+        return (t2);
+    }
+    else if (delta == 0)
+       return (b / (2 * a));
+    return (-1);
+}
+
+float    calcul_cylindre(t_cam *cam, t_ray *ray, t_cylindre *cy)
+{
+    float delta;
+    float a;
+    float b;
+    float c;
+    float t1;
+    float t2;
+
+    a = pow(ray->x, 2) + pow(ray->z, 2);
+    b = 2 * (ray->x * (cam->camx - cy->x) + ray->z * (cam->camz - cy->z));
+    c = (pow(cam->camx - cy->x, 2) + pow(cam->camz - cy->z, 2) - pow(cy->r, 2));
+    delta = (b * b) - 4 * a * c;
+    b = -b;
+    if (delta > 0.0f)
+    {
+        t1 = (b + sqrt(delta)) / (2 * a);
+        t2 = (b - sqrt(delta)) / (2 * a);
+        if (t1 <= t2)
+            return (t1);
+        return (t2);
+    }
+    else if (delta == 0)
+       return (b / (2 * a));
+    return (-1);
+}
+
 float    calcul_sphere(t_cam *cam, t_ray *ray, t_sphere *sphere)
 {
     float delta;

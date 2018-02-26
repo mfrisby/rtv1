@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_light.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/02/22 17:03:41 by mfrisby           #+#    #+#             */
+/*   Updated: 2018/02/22 17:03:44 by mfrisby          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/rtv1.h"
 
 static int get_pos(char *s, t_light *light)
@@ -19,9 +31,9 @@ static int get_pos(char *s, t_light *light)
 
 static int get_col(char *s, t_light *light)
 {
-    int     r;
-    int     g;
-    int     b;
+    int r;
+    int g;
+    int b;
     char **tab;
 
     tab = ft_strsplit(s, ',');
@@ -42,7 +54,7 @@ static int get_col(char *s, t_light *light)
 static int get_attribu(char **tab, int i, t_light *light)
 {
     char **tab2;
-    
+
     tab2 = ft_strsplit(tab[i], ':');
     if (!tab2 || !tab2[0] || !tab2[1])
         return (-1);
@@ -66,7 +78,7 @@ static int get_attribu(char **tab, int i, t_light *light)
     return (0);
 }
 
-t_light      *get_light(char *s)
+t_light *get_light(char *s)
 {
     int i;
     char **tab;
@@ -89,6 +101,6 @@ t_light      *get_light(char *s)
         free(tab[i]);
         i++;
     }
-    free(tab);    
+    free(tab);
     return (light);
 }
