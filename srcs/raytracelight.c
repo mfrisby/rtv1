@@ -102,7 +102,7 @@ int while_light(int *rgb, float *xyz, t_ray *intersection, t_data *data)
     while (l)
     {
         dot = get_dot(xyz, intersection, l, data);
-        color = get_color(color, rgb, l->coef, dot);
+        color = get_color(color, rgb, l, dot);
         l = l->next;
     }
     return (int)(((color[0] & 0xff) << 16) + ((color[1] & 0xff) << 8) + (color[2] & 0xff));

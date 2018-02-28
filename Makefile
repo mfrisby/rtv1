@@ -1,9 +1,9 @@
 NAME =		rtv1
 
-SRCS = 		srcs/main.c srcs/objects.c srcs/raytracer.c \
-			srcs/lst.c srcs/utils.c srcs/raytracelight.c srcs/free_heads.c\
-			srcs/parser.c srcs/get_cam.c \
-			srcs/get_sphere.c srcs/get_plan.c \
+SRCS = 		srcs/main.c srcs/raytracer.c  srcs/raytracelight.c\
+			srcs/calcul_objects.c srcs/while_objects.c \
+			srcs/lst.c srcs/utils.c srcs/free_heads.c\
+			srcs/parser.c srcs/get_cam.c srcs/get_sphere.c srcs/get_plan.c \
 			srcs/get_cylindre.c srcs/get_cone.c srcs/get_light.c\
 
 INCLUDES = 	-I ./inc

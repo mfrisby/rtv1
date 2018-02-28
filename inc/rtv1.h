@@ -6,7 +6,7 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 17:08:14 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/02/28 14:00:27 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/02/28 15:13:21 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,8 +158,14 @@ void rayloop(t_data *data, t_upleft *upleft, t_pix *pix);
 //object
 float calcul_sphere(t_cam *cam, t_ray *ray, t_sphere *sphere);
 float calcul_plan(t_cam *cam, t_ray *ray, t_plan *plan);
-float    calcul_cylindre(t_cam *cam, t_ray *ray, t_cylindre *c);
-float    calcul_cone(t_cam *cam, t_ray *ray, t_cone *cone);
+float calcul_cylindre(t_cam *cam, t_ray *ray, t_cylindre *c);
+float calcul_cone(t_cam *cam, t_ray *ray, t_cone *cone);
+
+float while_plan(t_data *data, t_ray *ray, float *xyz, int **rgb, float max_d);
+float while_sphere(t_data *data, t_ray *ray, float *xyz, int **rgb);
+float while_cylindre(t_data *data, t_ray *ray, float *xyz, int **rgb, float max_d);
+float while_cone(t_data *data, t_ray *ray, float *xyz, int **rgb, float max_d);
+
 //parsing
 t_cam *get_cam(char *s);
 t_sphere *get_sphere(char *s);
@@ -181,6 +187,6 @@ int	key_hook(int keycode, t_data *data);
 //light
 t_ray *get_intersection(t_cam *cam, t_ray *ray, float d);
 int    while_light(int *rgb, float *xyz, t_ray *intersection, t_data *data);
-int     *get_color(int *color, int *rgb, float coef, float dot);
+int     *get_color(int *color, int *rgb, t_light *l, float dot);
 
 #endif
