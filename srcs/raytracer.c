@@ -115,33 +115,23 @@ static float while_cylindre(t_data *data, t_ray *ray, float *xyz, int **rgb, flo
 static void raytrace(t_ray *ray, t_data *data, int x, int y)
 {
     int color;
-    int max_color;
     float max_d;
     float d;
-    t_light *l;
     float xyz[3];
     int *rgb;
 
     color = 0;
-    max_color = 0;
     max_d = 3.4028234664e+38;
     d = 0;
-    l = data->light_head;
     max_d = while_sphere(data, ray, xyz, &rgb);
     max_d = while_plan(data, ray, xyz, &rgb, max_d);
     max_d = while_cylindre(data, ray, xyz, &rgb, max_d);
     max_d = while_cone(data, ray, xyz, &rgb, max_d);
     if (max_d > 0 && max_d < 3.4028234664e+37)
     {
-        //multispot
-        while (l)
-        {
-            color = get_light_at(xyz, rgb, get_intersection(data->cam, ray, max_d), l, data);
-            if (color > max_color)
-                max_color = color;
-            mlx_pixel_put(data->mlx, data->win, x, y, max_color);
-            l = l->next;
-        }
+        t_ray *i = get_intersection(data->cam, ray, max_d);
+        color = while_light(rgb, xyz, i, data);
+        mlx_pixel_put(data->mlx, data->win, x, y, color);
     }
 }
 

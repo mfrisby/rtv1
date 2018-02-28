@@ -6,7 +6,7 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 17:08:14 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/02/26 17:29:44 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/02/28 14:00:27 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,6 @@ typedef struct s_data
 
 //functions
 void rayloop(t_data *data, t_upleft *upleft, t_pix *pix);
-int get_color(int r, int g, int b, float coef, float dot);
 //object
 float calcul_sphere(t_cam *cam, t_ray *ray, t_sphere *sphere);
 float calcul_plan(t_cam *cam, t_ray *ray, t_plan *plan);
@@ -177,11 +176,11 @@ int add_plan_lst(t_data **data, t_plan *elem);
 int add_light_lst(t_data **data, t_light *elem);
 //utils
 t_ray *normalize(float x, float y, float z);
-float get_dot(float ax, float ay, float az, float bx, float by, float bz);
 void    free_heads(t_data *data);
 int	key_hook(int keycode, t_data *data);
 //light
-int get_light_at(float *xyz, int *color, t_ray *intersection, t_light *light, t_data *data);
 t_ray *get_intersection(t_cam *cam, t_ray *ray, float d);
+int    while_light(int *rgb, float *xyz, t_ray *intersection, t_data *data);
+int     *get_color(int *color, int *rgb, float coef, float dot);
 
 #endif
