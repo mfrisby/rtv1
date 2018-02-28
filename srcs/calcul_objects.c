@@ -4,27 +4,11 @@ float        calcul_plan(t_cam *cam, t_ray *ray, t_plan *plan)
 {
     float   d;
     float   t;
-    float   a;
-    float   b;
-    float   c;
-    float   x;
-    float   y;
-    float   z;
-    float   x1;
-    float   y1;
-    float   z1;
-
-    a = plan->dirx;
-    b = plan->diry;
-    c = plan->dirz;
-    x = plan->x;
-    y = plan->y;
-    z = plan->z;
-    x1 = cam->camx - x;
-    y1 = cam->camy - y;
-    z1 = cam->camz - z;
-    d = -(a * x + b * y + c * z);
-    t = -((a * x1 + b * y1 + c * z1 + d) / (a * ray->x + b * ray->y + c * ray->z));
+    
+    d = -(plan->dirx * plan->x + plan->diry * plan->y + plan->dirz * plan->z);
+    t = -((plan->dirx * (cam->camx - plan->x) + plan->diry * (cam->camy - plan->y)
+        + plan->dirz * (cam->camz - plan->z) + d) / (plan->dirx * ray->x
+        + plan->diry * ray->y + plan->dirz * ray->z));
     return (t);
 }
 
