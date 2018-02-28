@@ -88,9 +88,11 @@ int  get_light_at(float *xyz, int *color, t_ray *intersection, t_light *light, t
     r->y = light->y - intersection->y;
     r->z = light->z - intersection->z;
     r = normalize(r->x, r->y, r->z);
+    //ombres
     if ((get_light_colision_cy_sphere(intersection, r, data)) == -1
         || (get_light_colision_cone_plan(intersection, r, data)) == -1)
-        return (get_color(color[0], color[1], color[2], 0.8f, 0));//ombre lumiere ambiance
+            return (get_color(color[0], color[1], color[2], light->coef, 0));
+    //objets
     dot = get_dot(p->x, p->y, p->z, r->x, r->y, r->z);
-    return (get_color(color[0], color[1], color[2], 0.8f, dot));
+    return (get_color(color[0], color[1], color[2], light->coef, dot));
 }

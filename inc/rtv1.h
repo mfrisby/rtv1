@@ -6,7 +6,7 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 17:08:14 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/02/26 16:28:18 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/02/26 17:29:44 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,6 +179,7 @@ int add_light_lst(t_data **data, t_light *elem);
 t_ray *normalize(float x, float y, float z);
 float get_dot(float ax, float ay, float az, float bx, float by, float bz);
 void    free_heads(t_data *data);
+int	key_hook(int keycode, t_data *data);
 //light
 int get_light_at(float *xyz, int *color, t_ray *intersection, t_light *light, t_data *data);
 t_ray *get_intersection(t_cam *cam, t_ray *ray, float d);

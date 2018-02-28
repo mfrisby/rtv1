@@ -1,0 +1,14 @@
+#scene plan
+[cam]
+pos:0,0,0;dir:0,0,-1
+[light]
+pos:-0.5,1.0,-1.0;coef:1.0;color:144,12,63
+##PLAN
+[plan]
+pos:0.2,-0.2,-5;dir:1,0,0;color:274,19,159
+[plan]
+pos:0.2,-0.2,-5;dir:0,1,0;color:0,191,255
+[sphere]
+pos:0.4,0.2,-2;rad:0.1;color:246,255,0
+[cylindre]
+pos:-0.2,-0.4,-2;dir:0,1,0;rad:0.1;color:255,255,255

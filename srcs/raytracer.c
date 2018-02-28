@@ -115,6 +115,7 @@ static float while_cylindre(t_data *data, t_ray *ray, float *xyz, int **rgb, flo
 static void raytrace(t_ray *ray, t_data *data, int x, int y)
 {
     int color;
+    int max_color;
     float max_d;
     float d;
     t_light *l;
@@ -122,6 +123,7 @@ static void raytrace(t_ray *ray, t_data *data, int x, int y)
     int *rgb;
 
     color = 0;
+    max_color = 0;
     max_d = 3.4028234664e+38;
     d = 0;
     l = data->light_head;
@@ -132,22 +134,15 @@ static void raytrace(t_ray *ray, t_data *data, int x, int y)
     if (max_d > 0 && max_d < 3.4028234664e+37)
     {
         //multispot
-        //while (l)
-        //{
+        while (l)
+        {
             color = get_light_at(xyz, rgb, get_intersection(data->cam, ray, max_d), l, data);
-            mlx_pixel_put(data->mlx, data->win, x, y, color);
-         //   l = l->next;
-       // }
+            if (color > max_color)
+                max_color = color;
+            mlx_pixel_put(data->mlx, data->win, x, y, max_color);
+            l = l->next;
+        }
     }
-}
-static int	key_hook(int keycode, t_data *data)
-{
-	if (keycode == 53)
-	{
-        free_heads(data);
-		exit(0);
-	}
-	return (0);
 }
 
 void rayloop(t_data *data, t_upleft *upleft, t_pix *pix)
