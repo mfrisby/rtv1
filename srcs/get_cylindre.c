@@ -117,6 +117,5 @@ t_cylindre      *get_cylindre(char *s)
         i++;
     }
     free(tab);
-    ft_putendl("return cylindre");
     return (cylindre);
 }
