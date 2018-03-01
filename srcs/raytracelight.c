@@ -67,16 +67,10 @@ static int     get_light_colision_cy_sphere(t_ray *i, t_ray *r, t_data *data)
     return (0);
 }
 
-static float  get_dot(float *xyz, t_ray *intersection, t_light *light, t_data *data)
+static float  get_dot(float *xyz, t_ray *intersection, t_ray *r, t_data *data)
 {
-    t_ray *r;
     t_ray *p;
     
-    r = malloc(sizeof(t_ray));
-    r->x = light->x - intersection->x;
-    r->y = light->y - intersection->y;
-    r->z = light->z - intersection->z;
-    r = normalize(r->x, r->y, r->z);
     if ((get_light_colision_cy_sphere(intersection, r, data)) == -1
         || (get_light_colision_cone_plan(intersection, r, data)) == -1)
             return (0);
@@ -91,19 +85,30 @@ static float  get_dot(float *xyz, t_ray *intersection, t_light *light, t_data *d
 int while_light(int *rgb, float *xyz, t_ray *intersection, t_data *data)
 {
     float dot;
+    //float dot2;
     int *color;
     t_light *l;
+    t_ray *r;
 
     color = malloc(sizeof(int) * 3);
+    r = malloc(sizeof(t_ray));
     color[0] = 0;
     color[1] = 0;
     color[2] = 0;
     l = data->light_head;
     while (l)
     {
-        dot = get_dot(xyz, intersection, l, data);
+        r->x = l->x - intersection->x;
+        r->y = l->y - intersection->y;
+        r->z = l->z - intersection->z;
+        r = normalize(r->x, r->y, r->z);
+        dot = get_dot(xyz, intersection, r, data);
+        //dot2 = (r->x * data->ray->x) + (r->y * data->ray->y)  + (r->z * data->ray->z);
         color = get_color(color, rgb, l, dot);
+        //printf("%f - %f\n", dot, dot2);
+        //color = get_color(color, rgb, l, dot2);
         l = l->next;
     }
+    free(color);
     return (int)(((color[0] & 0xff) << 16) + ((color[1] & 0xff) << 8) + (color[2] & 0xff));
 }

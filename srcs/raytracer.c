@@ -27,6 +27,7 @@ static void raytrace(t_ray *ray, t_data *data, int x, int y)
     max_d = while_plan(data, ray, xyz, &rgb, max_d);
     max_d = while_cylindre(data, ray, xyz, &rgb, max_d);
     max_d = while_cone(data, ray, xyz, &rgb, max_d);
+    data->ray = ray;
     if (max_d > 0 && max_d < 3.4028234664e+37)
     {
         t_ray *i = get_intersection(data->cam, ray, max_d);

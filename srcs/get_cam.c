@@ -37,6 +37,20 @@ static int get_dir(char *s, t_cam *cam)
     return (0);
 }
 
+static void sup_var(t_cam *cam)
+{
+    cam->vrightx = 1.0f;
+    cam->vrighty = 0.0f;
+    cam->vrightz = 0.0f;
+    cam->vupx = 0.0f;
+    cam->vupy = 1.0f;
+    cam->vupz = 0.0f;
+    cam->fovh = (float)(HEIGHT / 1000.0f);
+    cam->fovw = (float)(WIDTH / 1000.0f);
+    cam->fovd = 1.0f;
+    cam->is_init = INIT;
+}
+
 t_cam *get_cam(char *s)
 {
     int i;
@@ -67,17 +81,6 @@ t_cam *get_cam(char *s)
         i++;
     }
     free(tab);
-    cam->vrightx = 1.0f;
-    cam->vrighty = 0.0f;
-    cam->vrightz = 0.0f;
-        //vecup
-    cam->vupx = 0.0f;
-    cam->vupy = 1.0f;
-    cam->vupz = 0.0f;
-        //fov
-    cam->fovh = 0.35f;
-    cam->fovw = 0.5f;
-    cam->fovd = 1.0f;
-    cam->is_init = INIT;
+    sup_var(cam);
     return (cam);
 }
