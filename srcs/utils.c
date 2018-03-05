@@ -1,5 +1,10 @@
 #include "../inc/rtv1.h"
 
+/**
+ * Get escape key
+ * call function to free stuff
+ * exit program
+**/
 int	key_hook(int keycode, t_data *data)
 {
 	if (keycode == 53)
@@ -29,12 +34,16 @@ int     *get_color(int *color, int *rgb, t_light *l, float dot)
 {
     if (dot >= 0 && dot <= 1)
     {
+        //light coef less then 1 make it darker
+        //more than 1 lighter 
         if (rgb[0] > 0)
             color[0] += (rgb[0] + l->color[0]) * dot * l->coef;
         if (rgb[1] > 0)
             color[1] += (rgb[1] + l->color[1]) *  dot * l->coef;
         if (rgb[2] > 0)
             color[2] += (rgb[2] + l->color[2]) * dot * l->coef;
+        //Because adding light color to object color
+        //Verify MAX color
         if (color[0] > 255)
             color[0] = 255;
         if (color[1] > 255)
