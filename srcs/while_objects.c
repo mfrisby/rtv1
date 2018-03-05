@@ -25,14 +25,12 @@ float while_cone(t_data *data, t_ray *ray, int **rgb, float max_d)
     return (max_d);
 }
 
-float while_sphere(t_data *data, t_ray *ray, int **rgb)
+float while_sphere(t_data *data, t_ray *ray, int **rgb, float max_d)
 {
-    float max_d;
     float d;
     t_sphere *s;
 
     d = 0;
-    max_d = 3.4028234664e+38;
     s = data->sphere_head;
     while (s)
     {

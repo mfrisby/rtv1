@@ -6,7 +6,7 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 17:08:14 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/03/02 17:00:38 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/03/05 15:32:31 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,7 @@ float					calcul_cylindre(t_cam *cam, t_ray *ray, t_cylindre *c);
 float					calcul_cone(t_cam *cam, t_ray *ray, t_cone *cone);
 
 float					while_plan(t_data *data, t_ray *ray, int **rgb, float max_d);
-float					while_sphere(t_data *data, t_ray *ray, int **rgb);
+float					while_sphere(t_data *data, t_ray *ray, int **rgb, float max_d);
 float					while_cylindre(t_data *data, t_ray *ray, int **rgb, float max_d);
 float					while_cone(t_data *data, t_ray *ray, int **rgb, float max_d);
 
