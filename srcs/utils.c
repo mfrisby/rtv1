@@ -10,9 +10,24 @@ int	key_hook(int keycode, t_data *data)
 	return (0);
 }
 
+t_ray *get_intersection(t_cam *cam, t_ray *ray, float d)
+{
+    t_ray   *intersection;
+
+    if ((intersection = malloc(sizeof(t_ray))) == NULL)
+    {
+        ft_putendl(strerror(errno));
+        exit (0);
+    }
+    intersection->x = cam->camx + ray->x * d;
+    intersection->y = cam->camy + ray->y * d;
+    intersection->z = cam->camz + ray->z * d;
+    return (intersection);
+}
+
 int     *get_color(int *color, int *rgb, t_light *l, float dot)
 {
-    if (dot > 0.0f)
+    if (dot >= 0 && dot <= 1)
     {
         if (rgb[0] > 0)
             color[0] += (rgb[0] + l->color[0]) * dot * l->coef;
@@ -30,15 +45,13 @@ int     *get_color(int *color, int *rgb, t_light *l, float dot)
     return (color);
 }
 
-t_ray *normalize(float x, float y, float z)
+t_ray *normalize(t_ray *r)
 {
     float longueur;
-    t_ray   *r;
 
-    r = malloc(sizeof(t_ray));
-    longueur = sqrt((float)((x * x) + (y * y) + (z * z)));
-    r->x = x / longueur;
-    r->y = y / longueur;
-    r->z = z / longueur;
+    longueur = sqrt((float)((r->x * r->x) + (r->y * r->y) + (r->z * r->z)));
+    r->x /= longueur;
+    r->y /= longueur;
+    r->z /= longueur;
     return (r);
 }
