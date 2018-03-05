@@ -24,9 +24,9 @@ static void raytrace(t_ray *ray, t_data *data, int x, int y)
     max_d = while_plan(data, ray, &rgb, max_d);
     max_d = while_cylindre(data, ray, &rgb, max_d);
     max_d = while_cone(data, ray, &rgb, max_d);
-    data->ray = ray;
     if (max_d > 0 && max_d < 3.4028234664e+37)
     {
+        data->ray = ray;
         color = while_light(rgb, data);
         mlx_pixel_put(data->mlx, data->win, x, y, color);
     }
