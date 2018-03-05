@@ -7,9 +7,9 @@ static int get_pos(char *s, t_cam *cam)
     tab = ft_strsplit(s, ',');
     if (!tab || !tab[0] || !tab[1] || !tab[2])
         return (-1);
-    cam->camx = ft_getnbr(tab[0]);
-    cam->camy = ft_getnbr(tab[1]);
-    cam->camz = ft_getnbr(tab[2]);
+    cam->camx = (float)ft_getnbr(tab[0])/10;
+    cam->camy = (float)ft_getnbr(tab[1])/10;
+    cam->camz = (float)ft_getnbr(tab[2])/10;
     free(tab[0]);
     free(tab[1]);
     free(tab[2]);
@@ -23,10 +23,7 @@ static int get_dir(char *s, t_cam *cam)
 
     tab = ft_strsplit(s, ',');
     if (!tab || !tab[0] || !tab[1] || !tab[2])
-    {
-        ft_putendl(s);
         return (-1);
-    }
     cam->vdirx = ft_getnbr(tab[0]);
     cam->vdiry = ft_getnbr(tab[1]);
     cam->vdirz = ft_getnbr(tab[2]);
