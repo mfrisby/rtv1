@@ -42,6 +42,14 @@ int     *get_color(int *color, int *rgb, t_light *l, float dot)
             color[1] += (rgb[1] + l->color[1]) *  dot * l->coef;
         if (rgb[2] > 0)
             color[2] += (rgb[2] + l->color[2]) * dot * l->coef;
+        // if (l == NULL)
+        //     return (0);
+        // if (rgb[0] > 0)
+        //     color[0] += rgb[0] * dot;
+        // if (rgb[1] > 0)
+        //     color[1] += rgb[1]*  dot;
+        // if (rgb[2] > 0)
+        //     color[2] += rgb[2] * dot;
         //Because adding light color to object color
         //Verify MAX color
         if (color[0] > 255)
