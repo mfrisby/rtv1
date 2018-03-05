@@ -12,10 +12,10 @@ pos:0.2,-0.2,-5;dir:0,1,0;color:274,19,159
 #CYLINDRE
 #########
 [cylindre]
-pos:-0.2,0.0,-3;dir:0,1,0;rad:0.1;color:0,255,255
+pos:-0.2,0.0,-2;dir:0,1,0;rad:0.2;color:0,255,255
 [cylindre]
-pos:0.2,0.0,-3;dir:0,1,0;rad:0.1;color:0,255,255
+pos:0.2,0.0,-2;dir:0,1,0;rad:0.2;color:0,255,255
 [cylindre]
-pos:0.5,0.0,-2.5;dir:0,1,0;rad:0.1;color:0,0,255
+pos:0.5,0.0,-1;dir:0,1,0;rad:0.2;color:0,0,255
 [cylindre]
-pos:-0.5,0.0,-2.5;dir:0,1,0;rad:0.1;color:0,0,255
+pos:-0.5,0.0,-1;dir:0,1,0;rad:0.2;color:0,0,255
