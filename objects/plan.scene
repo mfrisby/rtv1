@@ -1,9 +1,9 @@
 [cam]
 pos:0.0,0.0,0;dir:0,0,-1
 [light]
-pos:0,0,0;coef:2;color:255,255,255
+pos:0,0,0;coef:0.5;color:255,255,255
 [sphere]
-pos:0.5,0,-5;rad:0.2;color:0,100,255//pink
+pos:0.5,0,-5;rad:0.2;color:255,0,0//pink
 [plan]
 pos:0,0,-10;dir:0,0,1;color:255,0,0//red
 [plan]
