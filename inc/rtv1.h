@@ -6,7 +6,7 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 17:08:14 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/03/01 14:11:02 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/03/02 17:00:38 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,8 @@ typedef struct			s_data
 	struct s_cylindre	*cylindre_head;
 	struct s_cam		*cam;
 	struct s_ray		*ray;
+	struct s_ray		*object_vect;
+	struct s_ray		*intersection;
 	void         		*current;
 	void 				*mlx;
 	void 				*win;
@@ -157,10 +159,10 @@ float					calcul_plan(t_cam *cam, t_ray *ray, t_plan *plan);
 float					calcul_cylindre(t_cam *cam, t_ray *ray, t_cylindre *c);
 float					calcul_cone(t_cam *cam, t_ray *ray, t_cone *cone);
 
-float					while_plan(t_data *data, t_ray *ray, float *xyz, int **rgb, float max_d);
-float					while_sphere(t_data *data, t_ray *ray, float *xyz, int **rgb);
-float					while_cylindre(t_data *data, t_ray *ray, float *xyz, int **rgb, float max_d);
-float					while_cone(t_data *data, t_ray *ray, float *xyz, int **rgb, float max_d);
+float					while_plan(t_data *data, t_ray *ray, int **rgb, float max_d);
+float					while_sphere(t_data *data, t_ray *ray, int **rgb);
+float					while_cylindre(t_data *data, t_ray *ray, int **rgb, float max_d);
+float					while_cone(t_data *data, t_ray *ray, int **rgb, float max_d);
 
 //parsing
 t_cam 					*get_cam(char *s);
@@ -177,12 +179,12 @@ int						add_sphere_lst(t_data **data, t_sphere *elem);
 int						add_plan_lst(t_data **data, t_plan *elem);
 int						add_light_lst(t_data **data, t_light *elem);
 //utils
-t_ray					*normalize(float x, float y, float z);
+t_ray					*normalize(t_ray *r);
 void					free_heads(t_data *data);
 int						key_hook(int keycode, t_data *data);
 //light
 t_ray					*get_intersection(t_cam *cam, t_ray *ray, float d);
-int						while_light(int *rgb, float *xyz, t_ray *intersection, t_data *data);
+int						while_light(int *rgb, t_data *data);
 int						*get_color(int *color, int *rgb, t_light *l, float dot);
 
 #endif

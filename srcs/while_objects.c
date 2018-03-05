@@ -1,6 +1,6 @@
 #include "../inc/rtv1.h"
 
-float while_cone(t_data *data, t_ray *ray, float *xyz, int **rgb, float max_d)
+float while_cone(t_data *data, t_ray *ray, int **rgb, float max_d)
 {
     float d;
     t_cone *c;
@@ -13,9 +13,10 @@ float while_cone(t_data *data, t_ray *ray, float *xyz, int **rgb, float max_d)
         if (d > 0 && d < max_d)
         {
             max_d = d;
-            xyz[0] = c->x;
-            xyz[1] = c->y;
-            xyz[2] = c->z;
+            data->intersection = get_intersection(data->cam, ray, max_d);
+            data->object_vect->x = c->x;
+            data->object_vect->y = c->y;
+            data->object_vect->z = c->z;
             *rgb = c->color;
             data->current = c; 
         }
@@ -24,7 +25,7 @@ float while_cone(t_data *data, t_ray *ray, float *xyz, int **rgb, float max_d)
     return (max_d);
 }
 
-float while_sphere(t_data *data, t_ray *ray, float *xyz, int **rgb)
+float while_sphere(t_data *data, t_ray *ray, int **rgb)
 {
     float max_d;
     float d;
@@ -39,9 +40,10 @@ float while_sphere(t_data *data, t_ray *ray, float *xyz, int **rgb)
         if (d > 0 && d < max_d)
         {
             max_d = d;
-            xyz[0] = s->x;
-            xyz[1] = s->y;
-            xyz[2] = s->z;
+            data->intersection = get_intersection(data->cam, ray, max_d);
+            data->object_vect->x = data->intersection->x - s->x;
+            data->object_vect->y = data->intersection->y - s->y;
+            data->object_vect->z = data->intersection->z - s->z;
             *rgb = s->color;
             data->current = s; 
         }
@@ -50,7 +52,7 @@ float while_sphere(t_data *data, t_ray *ray, float *xyz, int **rgb)
     return (max_d);
 }
 
-float while_plan(t_data *data, t_ray *ray, float *xyz, int **rgb, float max_d)
+float while_plan(t_data *data, t_ray *ray, int **rgb, float max_d)
 {
     float d;
     t_plan *p;
@@ -63,9 +65,10 @@ float while_plan(t_data *data, t_ray *ray, float *xyz, int **rgb, float max_d)
         if (d > 0 && d < max_d)
         {
             max_d = d;
-            xyz[0] = p->x;
-            xyz[1] = p->y;
-            xyz[2] = p->z;
+            data->intersection = get_intersection(data->cam, ray, max_d);
+            data->object_vect->x = p->dirx;
+            data->object_vect->y = p->diry;
+            data->object_vect->z = p->dirz;
             *rgb = p->color;
             data->current = p;
         }
@@ -74,7 +77,7 @@ float while_plan(t_data *data, t_ray *ray, float *xyz, int **rgb, float max_d)
     return (max_d);
 }
 
-float while_cylindre(t_data *data, t_ray *ray, float *xyz, int **rgb, float max_d)
+float while_cylindre(t_data *data, t_ray *ray, int **rgb, float max_d)
 {
     float d;
     t_cylindre *c;
@@ -87,9 +90,10 @@ float while_cylindre(t_data *data, t_ray *ray, float *xyz, int **rgb, float max_
         if (d > 0 && d < max_d)
         {
             max_d = d;
-            xyz[0] = c->x;
-            xyz[1] = c->y;//fix lumiere temporaire
-            xyz[2] = c->z;
+            data->intersection = get_intersection(data->cam, ray, max_d);
+            data->object_vect->x = c->x;
+            data->object_vect->y = c->y;
+            data->object_vect->z = c->z;
             *rgb = c->color;
             data->current = c;
         }
