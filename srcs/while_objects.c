@@ -16,7 +16,7 @@ float while_cone(t_data *data, t_ray *ray, int **rgb, float max_d)
             data->max_d = d;
             data->intersection = get_intersection(data->cam, ray, max_d);
             data->object_norme->x = data->intersection->x - c->x;
-            data->object_norme->y = data->intersection->y - c->y;
+            data->object_norme->y = 0;
             data->object_norme->z = data->intersection->z - c->z;
             *rgb = c->color;
             data->current = c; 
