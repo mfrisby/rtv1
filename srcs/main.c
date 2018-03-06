@@ -14,7 +14,7 @@ t_data        *init_data()
     data->plan_head = NULL;
     data->cone_head = NULL;
     data->cylindre_head = NULL;
-    data->object_vect = malloc(sizeof(t_ray));
+    data->object_norme = malloc(sizeof(t_ray));
     data->light_head = NULL;
     data->cam = NULL;
     data->mlx = NULL;
@@ -40,7 +40,7 @@ void        init_space(t_cam *cam, t_pix **pix, t_upleft **upleft)
     ft_putendl("Init camera.");
     if (((*upleft) = malloc(sizeof(t_upleft))) == NULL || ((*pix) = malloc(sizeof(t_pix))) == NULL)
     {
-        ft_printf("\033[0;31mError: %s\033[0m",strerror(errno));
+        ft_printf("\033[0;31mError: %s\033[0m", strerror(errno));
         exit (0);
     }
     (*upleft)->x = cam->camx + ((cam->vdirx * cam->fovd) + (cam->vupx * (cam->fovh / 2.0f))) - (cam->vrightx * (cam->fovw / 2.0f));
