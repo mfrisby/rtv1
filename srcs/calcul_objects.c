@@ -12,19 +12,17 @@ float        calcul_plan(t_cam *cam, t_ray *ray, t_plan *plan)
     return (t);
 }
 
-float    calcul_cone(t_cam *cam, t_ray *ray, t_cone *cone)
+float    calcul_cylindre(t_cam *cam, t_ray *ray, t_cylindre *cy)
 {
     float delta;
     float a;
     float b;
     float c;
     float t[2];
-    float my_tan;
 
-    my_tan = pow(tan(cone->r), 2);
-    a = pow(ray->x, 2) + pow(ray->z, 2) - pow(ray->y, 2) * my_tan;
-    b = 2 * (ray->x * (cam->camx - cone->x) + ray->z * (cam->camz - cone->z) - ray->y * (cam->camy - cone->y) * my_tan);
-    c = (pow(cam->camx - cone->x, 2) + pow(cam->camz - cone->z, 2) - pow(cam->camy - cone->y, 2) - pow(cone->r, 2));
+    a = pow(ray->x, 2) + pow(ray->z, 2);
+    b = 2 * (ray->x * (cam->camx - cy->x) + ray->z * (cam->camz - cy->z));
+    c = (pow(cam->camx - cy->x, 2) + pow(cam->camz - cy->z, 2) - pow(cy->r, 2));
     delta = (b * b) - 4 * a * c;
     b = -b;
     if (delta > 0.0f)
@@ -40,17 +38,20 @@ float    calcul_cone(t_cam *cam, t_ray *ray, t_cone *cone)
     return (-1);
 }
 
-float    calcul_cylindre(t_cam *cam, t_ray *ray, t_cylindre *cy)
+float    calcul_cone(t_cam *cam, t_ray *ray, t_cone *cone)
 {
     float delta;
     float a;
     float b;
     float c;
     float t[2];
+    float my_tan;
 
-    a = pow(ray->x, 2) + pow(ray->z, 2);
-    b = 2 * (ray->x * (cam->camx - cy->x) + ray->z * (cam->camz - cy->z));
-    c = (pow(cam->camx - cy->x, 2) + pow(cam->camz - cy->z, 2) - pow(cy->r, 2));
+    my_tan = pow(tan(cone->r * 0.0174533f), 2);
+    printf("tan: %f\n", my_tan);
+    a = pow(ray->x, 2) + pow(ray->z, 2) - pow(ray->y, 2) * my_tan;
+    b = 2 * (ray->x * (cam->camx - cone->x) + ray->z * (cam->camz - cone->z) - ray->y * (cam->camy - cone->y) * my_tan);
+    c = (pow(cam->camx - cone->x, 2) + pow(cam->camz - cone->z, 2) - pow(cam->camy - cone->y, 2) * my_tan);
     delta = (b * b) - 4 * a * c;
     b = -b;
     if (delta > 0.0f)
