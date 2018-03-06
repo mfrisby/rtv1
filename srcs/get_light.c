@@ -6,7 +6,7 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 17:03:41 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/03/05 15:21:51 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/03/06 16:50:10 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ static int get_attribu(char **tab, int i, t_light *light)
     else if (ft_strcmp(tab2[0], "coef") == 0)
     {
         light->coef = ft_getfloat(tab2[1]);
-        printf("coef: %f\n", light->coef);
         if (light->coef < 0.1f)
             ft_putendl("\033[0;33mWarning: A spot has light coef less than 0.1f.\033[0m");
     }
