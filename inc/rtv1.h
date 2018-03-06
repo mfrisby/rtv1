@@ -6,7 +6,7 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 17:08:14 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/03/05 15:32:31 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/03/06 15:59:31 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,7 @@ typedef struct			s_pix
 
 typedef struct			s_data
 {
+	float				max_d;
 	struct s_sphere		*sphere_head;
 	struct s_light		*light_head;
 	struct s_plan		*plan_head;
@@ -144,7 +145,7 @@ typedef struct			s_data
 	struct s_cylindre	*cylindre_head;
 	struct s_cam		*cam;
 	struct s_ray		*ray;
-	struct s_ray		*object_vect;
+	struct s_ray		*object_norme;
 	struct s_ray		*intersection;
 	void         		*current;
 	void 				*mlx;
@@ -186,5 +187,5 @@ int						key_hook(int keycode, t_data *data);
 t_ray					*get_intersection(t_cam *cam, t_ray *ray, float d);
 int						while_light(int *rgb, t_data *data);
 int						*get_color(int *color, int *rgb, t_light *l, float dot);
-
+int						get_colision(t_ray *r, t_data *data);
 #endif
