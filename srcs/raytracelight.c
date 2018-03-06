@@ -25,10 +25,11 @@ int while_light(int *rgb, t_data *data)
     while (l)
     {
         init_ray_light(r, data, l);
-        if (get_colision(r, data) < 0)
-            return (-1);
-        dot = (data->object_norme->x * r->x) + (data->object_norme->y * r->y) + (data->object_norme->z * r->z);
-        color = get_color(color, rgb, l, dot);
+        if (get_colision(r, data) == 0)
+        {
+            dot = (data->object_norme->x * r->x) + (data->object_norme->y * r->y) + (data->object_norme->z * r->z);
+            color = get_color(color, rgb, l, dot);
+        }
         l = l->next;
     }
     return (int)(((color[0] & 0xff) << 16) + ((color[1] & 0xff) << 8) + (color[2] & 0xff));

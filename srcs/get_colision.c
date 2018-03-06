@@ -12,9 +12,12 @@ static int colision_cone(t_ray *r, t_data *data)
     cone = data->cone_head;
     while (cone)
     {
-        d = calcul_cone(&fakecam, r, cone);
-        if (cone != data->current && d > 0 && d < data->max_d)
-            return(-1);
+        if (cone != data->current)
+        {
+            d = calcul_cone(&fakecam, r, cone);
+            if (d > 0 && d < data->max_d)
+                return(-1);
+        }
         cone = cone->next;
     }
     return (0);
@@ -32,9 +35,12 @@ static int colision_sphere(t_ray *r, t_data *data)
     sphere = data->sphere_head;
     while (sphere)
     {
-        d = calcul_sphere(&fakecam, r, sphere);
-        if (sphere != data->current && d > 0 && d < data->max_d)
-            return(-1);
+        if (sphere != data->current)
+        {
+            d = calcul_sphere(&fakecam, r, sphere);
+            if (d > 0 && d < data->max_d)
+                return(-1);
+        }
         sphere = sphere->next;
     }
     return (0);
@@ -52,9 +58,12 @@ static int colision_cylindre(t_ray *r, t_data *data)
     cylindre = data->cylindre_head;
     while (cylindre)
     {
-        d = calcul_cylindre(&fakecam, r, cylindre);
-        if (cylindre != data->current && d > 0 && d < data->max_d)
-            return(-1);
+        if (cylindre != data->current)
+        {
+            d = calcul_cylindre(&fakecam, r, cylindre);
+            if (d > 0 && d < data->max_d)
+                return(-1);
+        }
         cylindre = cylindre->next;
     }
     return (0);
@@ -71,9 +80,12 @@ static int colision_plan(t_ray *r, t_data *data)
     plan = data->plan_head;
     while (plan)
     {
-        d = calcul_plan(&fakecam, r, plan);
-        if (plan != data->current && d > 0 && d < data->max_d)
-            return(-1);
+        if (plan != data->current)
+        {
+            d = calcul_plan(&fakecam, r, plan);
+            if (d > 0 && d < data->max_d)
+                return(-1);
+        }
         plan = plan->next;
     }
     return (0);
