@@ -18,8 +18,7 @@ float    calcul_cone(t_cam *cam, t_ray *ray, t_cone *cone)
     float a;
     float b;
     float c;
-    float t1;
-    float t2;
+    float t[2];
 
     a = pow(ray->x, 2) + pow(ray->z, 2) - pow(ray->y, 2);
     b = 2 * (ray->x * (cam->camx - cone->x) + ray->z * (cam->camz - cone->z) - ray->y * (cam->camy - cone->y));
@@ -28,11 +27,11 @@ float    calcul_cone(t_cam *cam, t_ray *ray, t_cone *cone)
     b = -b;
     if (delta > 0.0f)
     {
-        t1 = (b + sqrt(delta)) / (2 * a);
-        t2 = (b - sqrt(delta)) / (2 * a);
-        if (t1 <= t2)
-            return (t1);
-        return (t2);
+        t[0] = (b + sqrt(delta)) / (2 * a);
+        t[1] = (b - sqrt(delta)) / (2 * a);
+        if (t[0] <= t[1])
+            return (t[0]);
+        return (t[1]);
     }
     else if (delta == 0)
        return (b / (2 * a));
@@ -45,8 +44,7 @@ float    calcul_cylindre(t_cam *cam, t_ray *ray, t_cylindre *cy)
     float a;
     float b;
     float c;
-    float t1;
-    float t2;
+    float t[2];
 
     a = pow(ray->x, 2) + pow(ray->z, 2);
     b = 2 * (ray->x * (cam->camx - cy->x) + ray->z * (cam->camz - cy->z));
@@ -55,11 +53,11 @@ float    calcul_cylindre(t_cam *cam, t_ray *ray, t_cylindre *cy)
     b = -b;
     if (delta > 0.0f)
     {
-        t1 = (b + sqrt(delta)) / (2 * a);
-        t2 = (b - sqrt(delta)) / (2 * a);
-        if (t1 <= t2)
-            return (t1);
-        return (t2);
+        t[0] = (b + sqrt(delta)) / (2 * a);
+        t[1] = (b - sqrt(delta)) / (2 * a);
+        if (t[0] <= t[1])
+            return (t[0]);
+        return (t[1]);
     }
     else if (delta == 0)
        return (b / (2 * a));
@@ -72,8 +70,7 @@ float    calcul_sphere(t_cam *cam, t_ray *ray, t_sphere *sphere)
     float a;
     float b;
     float c;
-    float t1;
-    float t2;
+    float t[2];
 
     a = pow(ray->x, 2) + pow(ray->y, 2) + pow(ray->z, 2);
     b = 2 * (ray->x * (cam->camx - sphere->x) + ray->y * (cam->camy - sphere->y) + ray->z * (cam->camz - sphere->z));
@@ -82,11 +79,11 @@ float    calcul_sphere(t_cam *cam, t_ray *ray, t_sphere *sphere)
     b = -b;
     if (delta > 0.0f)
     {
-        t1 = (b + sqrt(delta)) / (2 * a);
-        t2 = (b - sqrt(delta)) / (2 * a);
-        if (t1 <= t2)
-            return (t1);
-        return (t2);
+        t[0] = (b + sqrt(delta)) / (2 * a);
+        t[1] = (b - sqrt(delta)) / (2 * a);
+        if (t[0] <= t[1])
+            return (t[0]);
+        return (t[1]);
     }
     else if (delta == 0)
        return (b / (2 * a));
