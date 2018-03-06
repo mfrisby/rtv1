@@ -51,8 +51,8 @@ static int get_attribu(char **tab, int i, t_cone *cone)
         if (get_pos(tab2[1], cone) == -1)
             return (-1);
     }
-    else if (ft_strcmp(tab2[0], "rad") == 0)
-        cone->r = ft_getfloat(tab2[1]);
+    else if (ft_strcmp(tab2[0], "ang") == 0)
+        cone->r = pow(tan(ft_getnbr(tab2[1]) * 0.0174533f), 2);
     else if (ft_strcmp(tab2[0], "color") == 0)
     {
         if (get_col(tab2[1], cone) == -1)
