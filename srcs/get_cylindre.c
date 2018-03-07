@@ -6,7 +6,7 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 17:28:45 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/03/07 10:21:39 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/03/07 12:11:46 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,23 +22,6 @@ static int		get_pos(char *s, t_cylindre *cylindre)
 	cylindre->x = ft_getfloat(tab[0]);
 	cylindre->y = ft_getfloat(tab[1]);
 	cylindre->z = ft_getfloat(tab[2]);
-	free(tab[0]);
-	free(tab[1]);
-	free(tab[2]);
-	free(tab);
-	return (0);
-}
-
-static int		get_dir(char *s, t_cylindre *cylindre)
-{
-	char		**tab;
-
-	tab = ft_strsplit(s, ',');
-	if (!tab || !tab[0] || !tab[1] || !tab[2])
-		return (-1);
-	cylindre->dirx = ft_getfloat(tab[0]);
-	cylindre->diry = ft_getfloat(tab[1]);
-	cylindre->dirz = ft_getfloat(tab[2]);
 	free(tab[0]);
 	free(tab[1]);
 	free(tab[2]);
@@ -75,9 +58,8 @@ static int		get_attribu(char **tab, int i, t_cylindre *cylindre)
 		if (get_pos(tab2[1], cylindre) == -1)
 			return (-1);
 	}
-	else if (ft_strcmp(tab2[0], "dir") == 0
-			&& get_dir(tab2[1], cylindre) == -1)
-		return (-1);
+	else if (ft_strcmp(tab2[0], "rot") == 0)
+		cylindre->rot = ft_getfloat(tab2[1]);
 	else if (ft_strcmp(tab2[0], "rad") == 0)
 		cylindre->r = ft_getfloat(tab2[1]);
 	else if (ft_strcmp(tab2[0], "color") == 0)
