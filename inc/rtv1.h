@@ -6,7 +6,7 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 17:08:14 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/03/06 17:16:07 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/03/07 14:00:52 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 # include <fcntl.h>
 # include <errno.h>
 
-# define WIDTH 500
-# define HEIGHT 350
+# define WIDTH 700
+# define HEIGHT 500
 
 # define COLORBLUE 4349940
 # define COLORRED 16204611
@@ -87,9 +87,7 @@ typedef struct			s_cylindre
 	float				y;
 	float				z;
 	float				r;
-	float				dirx;
-	float				diry;
-	float				dirz;
+	float				rot;
 	struct s_cylindre	*next;
 }						t_cylindre;
 
@@ -99,7 +97,8 @@ typedef struct			s_cone
 	float				x;
 	float				y;
 	float				z;
-	float				r;
+	float				ang;
+	float				rot;
 	struct s_cone		*next;
 }						t_cone;
 

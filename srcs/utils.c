@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfrisby <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 10:28:27 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/03/07 10:31:35 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/03/07 13:31:36 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_ray		*get_intersection(t_cam *cam, t_ray *ray, float d)
 	{
 		ft_putendl(strerror(errno));
 		exit(0);
-	}
+    }
 	intersection->x = cam->camx + ray->x * d;
 	intersection->y = cam->camy + ray->y * d;
 	intersection->z = cam->camz + ray->z * d;

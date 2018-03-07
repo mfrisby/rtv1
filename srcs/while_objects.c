@@ -41,8 +41,6 @@ float while_sphere(t_data *data, t_ray *ray, int **rgb, float max_d)
             max_d = d;
             data->max_d = d;
             data->intersection = get_intersection(data->cam, ray, max_d);
-            //norme de la sphere
-            //intersection - point central
             data->object_norme->x = data->intersection->x - s->x;
             data->object_norme->y = data->intersection->y - s->y;
             data->object_norme->z = data->intersection->z - s->z;
@@ -68,8 +66,6 @@ float while_plan(t_data *data, t_ray *ray, int **rgb, float max_d)
         {
             max_d = d;
             data->max_d = d;
-            //norme du plan
-            //direction donne dans fichier config
             data->intersection = get_intersection(data->cam, ray, max_d);
             data->object_norme->x = p->dirx;
             data->object_norme->y = p->diry;
@@ -96,9 +92,6 @@ float while_cylindre(t_data *data, t_ray *ray, int **rgb, float max_d)
         {
             max_d = d;
             data->max_d = d;
-            //norme du cylindre
-            //si sur axe y
-            //intersection en y
             data->intersection = get_intersection(data->cam, ray, max_d);
             data->object_norme->x = data->intersection->x - c->x;
             data->object_norme->y = 0;

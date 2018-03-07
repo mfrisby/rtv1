@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calcul_objects.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfrisby <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 17:16:48 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/03/06 17:18:58 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/03/07 14:16:06 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,16 @@ float		calcul_cylindre(t_cam *cam, t_ray *ray, t_cylindre *cy)
 	float	b;
 	float	c;
 	float	t[2];
+	float xprime;
+	float yprime;
 
+	//axe y
+	//yprime = ray->y * cos(cy->rot) - ray->z * sin(cy->rot)
+	//zprime = ray->y * sin(cy->rot) + ray->z * cos(cy->rot)
+	xprime = ray->x * cos(cy->rot) - ray->y * sin(cy->rot);
+	yprime = ray->x * sin(cy->rot) + ray->y * cos(cy->rot);
+	ray->x = xprime;
+	ray->y = yprime;
 	a = pow(ray->x, 2) + pow(ray->z, 2);
 	b = 2 * (ray->x * (cam->camx - cy->x) + ray->z * (cam->camz - cy->z));
 	c = (pow(cam->camx - cy->x, 2) + pow(cam->camz - cy->z, 2) - pow(cy->r, 2));
@@ -47,7 +56,7 @@ float		calcul_cylindre(t_cam *cam, t_ray *ray, t_cylindre *cy)
 		return (t[1]);
 	}
 	else if (delta == 0)
-		return (b / (2 * a));
+	 	return (b / (2 * a));
 	return (-1);
 }
 
@@ -58,12 +67,21 @@ float		calcul_cone(t_cam *cam, t_ray *ray, t_cone *cone)
 	float	b;
 	float	c;
 	float	t[2];
+	float xprime;
+	float yprime;
 
-	a = pow(ray->x, 2) + pow(ray->z, 2) - pow(ray->y, 2) * cone->r;
+	//axe y
+	//yprime = ray->y * cos(cy->rot) - ray->z * sin(cy->rot)
+	//zprime = ray->y * sin(cy->rot) + ray->z * cos(cy->rot)
+	xprime = ray->x * cos(cone->rot) - ray->y * sin(cone->rot);
+	yprime = ray->x * sin(cone->rot) + ray->y * cos(cone->rot);
+	ray->x = xprime;
+	ray->y = yprime;
+	a = pow(ray->x, 2) + pow(ray->z, 2) - pow(ray->y, 2) * cone->ang;
 	b = 2 * (ray->x * (cam->camx - cone->x) + ray->z *
-			(cam->camz - cone->z) - ray->y * (cam->camy - cone->y) * cone->r);
+			(cam->camz - cone->z) - ray->y * (cam->camy - cone->y) * cone->ang);
 	c = (pow(cam->camx - cone->x, 2) + pow(cam->camz - cone->z, 2)
-			- pow(cam->camy - cone->y, 2) * cone->r);
+			- pow(cam->camy - cone->y, 2) * cone->ang);
 	delta = (b * b) - 4 * a * c;
 	b = -b;
 	if (delta > 0.0f)

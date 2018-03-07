@@ -6,7 +6,7 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 17:28:45 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/03/07 12:11:46 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/03/07 14:08:50 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static int		get_attribu(char **tab, int i, t_cylindre *cylindre)
 			return (-1);
 	}
 	else if (ft_strcmp(tab2[0], "rot") == 0)
-		cylindre->rot = ft_getfloat(tab2[1]);
+		cylindre->rot = 3.14f * ft_getnbr(tab2[1]) / 180.0f;
 	else if (ft_strcmp(tab2[0], "rad") == 0)
 		cylindre->r = ft_getfloat(tab2[1]);
 	else if (ft_strcmp(tab2[0], "color") == 0)
