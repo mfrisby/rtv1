@@ -6,7 +6,7 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 17:08:14 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/03/07 14:00:52 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/03/07 14:23:58 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,6 +177,7 @@ int						add_sphere_lst(t_data **data, t_sphere *elem);
 int						add_plan_lst(t_data **data, t_plan *elem);
 int						add_light_lst(t_data **data, t_light *elem);
 t_ray					*normalize(t_ray *r);
+void        rotate(t_ray *ray, float rot);
 void					free_heads(t_data *data);
 int						key_hook(int keycode, t_data *data);
 t_ray					*get_intersection(t_cam *cam, t_ray *ray, float d);

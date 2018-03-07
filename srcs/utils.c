@@ -6,11 +6,25 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 10:28:27 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/03/07 13:31:36 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/03/07 14:24:40 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/rtv1.h"
+
+void        rotate(t_ray *ray, float rot)
+{
+    float xprime;
+    float yprime;
+
+	//axe y
+	//yprime = ray->y * cos(rot) - ray->z * sin(rot)
+	//zprime = ray->y * sin(rot) + ray->z * cos(rot)
+	xprime = ray->x * cos(rot) - ray->y * sin(rot);
+	yprime = ray->x * sin(rot) + ray->y * cos(rot);
+	ray->x = xprime;
+	ray->y = yprime;
+}
 
 int			key_hook(int keycode, t_data *data)
 {

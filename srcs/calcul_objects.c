@@ -6,7 +6,7 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 17:16:48 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/03/07 14:16:06 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/03/07 14:25:09 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,8 @@ float		calcul_cylindre(t_cam *cam, t_ray *ray, t_cylindre *cy)
 	float	b;
 	float	c;
 	float	t[2];
-	float xprime;
-	float yprime;
 
-	//axe y
-	//yprime = ray->y * cos(cy->rot) - ray->z * sin(cy->rot)
-	//zprime = ray->y * sin(cy->rot) + ray->z * cos(cy->rot)
-	xprime = ray->x * cos(cy->rot) - ray->y * sin(cy->rot);
-	yprime = ray->x * sin(cy->rot) + ray->y * cos(cy->rot);
-	ray->x = xprime;
-	ray->y = yprime;
+	rotate(ray, cy->rot);
 	a = pow(ray->x, 2) + pow(ray->z, 2);
 	b = 2 * (ray->x * (cam->camx - cy->x) + ray->z * (cam->camz - cy->z));
 	c = (pow(cam->camx - cy->x, 2) + pow(cam->camz - cy->z, 2) - pow(cy->r, 2));
@@ -67,16 +59,8 @@ float		calcul_cone(t_cam *cam, t_ray *ray, t_cone *cone)
 	float	b;
 	float	c;
 	float	t[2];
-	float xprime;
-	float yprime;
 
-	//axe y
-	//yprime = ray->y * cos(cy->rot) - ray->z * sin(cy->rot)
-	//zprime = ray->y * sin(cy->rot) + ray->z * cos(cy->rot)
-	xprime = ray->x * cos(cone->rot) - ray->y * sin(cone->rot);
-	yprime = ray->x * sin(cone->rot) + ray->y * cos(cone->rot);
-	ray->x = xprime;
-	ray->y = yprime;
+	rotate(ray, cone->rot);
 	a = pow(ray->x, 2) + pow(ray->z, 2) - pow(ray->y, 2) * cone->ang;
 	b = 2 * (ray->x * (cam->camx - cone->x) + ray->z *
 			(cam->camz - cone->z) - ray->y * (cam->camy - cone->y) * cone->ang);
