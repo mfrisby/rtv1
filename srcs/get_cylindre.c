@@ -6,7 +6,7 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 17:28:45 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/03/06 17:37:02 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/03/07 10:21:39 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,20 +48,14 @@ static int		get_dir(char *s, t_cylindre *cylindre)
 
 static int		get_col(char *s, t_cylindre *cylindre)
 {
-	int			r;
-	int			g;
-	int			b;
 	char		**tab;
 
 	tab = ft_strsplit(s, ',');
 	if (!tab || !tab[0] || !tab[1] || !tab[2])
 		return (-1);
-	r = ft_getnbr(tab[0]);
-	g = ft_getnbr(tab[1]);
-	b = ft_getnbr(tab[2]);
-	cylindre->color[0] = r;
-	cylindre->color[1] = g;
-	cylindre->color[2] = b;
+	cylindre->color[0] = ft_getnbr(tab[0]);
+	cylindre->color[1] = ft_getnbr(tab[1]);
+	cylindre->color[2] = ft_getnbr(tab[2]);
 	free(tab[0]);
 	free(tab[1]);
 	free(tab[2]);

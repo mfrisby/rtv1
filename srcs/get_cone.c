@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_cone.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfrisby <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 17:27:20 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/03/06 17:28:40 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/03/07 10:22:00 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,20 +31,14 @@ static int		get_pos(char *s, t_cone *cone)
 
 static int		get_col(char *s, t_cone *cone)
 {
-	int			r;
-	int			g;
-	int			b;
 	char		**tab;
 
 	tab = ft_strsplit(s, ',');
 	if (!tab || !tab[0] || !tab[1] || !tab[2])
 		return (-1);
-	r = ft_getnbr(tab[0]);
-	g = ft_getnbr(tab[1]);
-	b = ft_getnbr(tab[2]);
-	cone->color[0] = r;
-	cone->color[1] = g;
-	cone->color[2] = b;
+	cone->color[0] = ft_getnbr(tab[0]);
+	cone->color[1] = ft_getnbr(tab[1]);
+	cone->color[2] = ft_getnbr(tab[2]);
 	free(tab[0]);
 	free(tab[1]);
 	free(tab[2]);

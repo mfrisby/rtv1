@@ -6,7 +6,7 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 17:05:33 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/03/06 17:42:17 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/03/07 10:21:02 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,20 +31,14 @@ static int		get_pos(char *s, t_sphere *sphere)
 
 static int		get_col(char *s, t_sphere *sphere)
 {
-	int			r;
-	int			g;
-	int			b;
 	char		**tab;
 
 	tab = ft_strsplit(s, ',');
 	if (!tab || !tab[0] || !tab[1] || !tab[2])
 		return (-1);
-	r = ft_getnbr(tab[0]);
-	g = ft_getnbr(tab[1]);
-	b = ft_getnbr(tab[2]);
-	sphere->color[0] = r;
-	sphere->color[1] = g;
-	sphere->color[2] = b;
+	sphere->color[0] = ft_getnbr(tab[0]);
+	sphere->color[1] = ft_getnbr(tab[1]);
+	sphere->color[2] = ft_getnbr(tab[2]);
 	free(tab[0]);
 	free(tab[1]);
 	free(tab[2]);
