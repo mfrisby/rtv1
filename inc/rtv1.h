@@ -6,7 +6,7 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 17:08:14 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/03/07 14:23:58 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/03/09 13:16:58 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,9 +143,9 @@ typedef struct			s_data
 	struct s_cone		*cone_head;
 	struct s_cylindre	*cylindre_head;
 	struct s_cam		*cam;
-	struct s_ray		*ray;
 	struct s_ray		*object_norme;
 	struct s_ray		*intersection;
+	struct s_ray		*ray;
 	void				*current;
 	void				*mlx;
 	void				*win;
@@ -177,11 +177,11 @@ int						add_sphere_lst(t_data **data, t_sphere *elem);
 int						add_plan_lst(t_data **data, t_plan *elem);
 int						add_light_lst(t_data **data, t_light *elem);
 t_ray					*normalize(t_ray *r);
-void        rotate(t_ray *ray, float rot);
 void					free_heads(t_data *data);
 int						key_hook(int keycode, t_data *data);
 t_ray					*get_intersection(t_cam *cam, t_ray *ray, float d);
 int						while_light(int *rgb, t_data *data);
-int						*get_color(int *color, int *rgb, t_light *l, float dot);
+int			*get_color(int *color, int *rgb, t_light *l, float dot);
+float		get_dot(t_ray *r1, t_ray *r2);
 int						get_colision(t_ray *r, t_data *data);
 #endif
