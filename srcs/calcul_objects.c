@@ -6,7 +6,7 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 17:16:48 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/03/07 14:25:09 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/03/09 10:22:15 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ float		calcul_cylindre(t_cam *cam, t_ray *ray, t_cylindre *cy)
 	float	c;
 	float	t[2];
 
-	rotate(ray, cy->rot);
 	a = pow(ray->x, 2) + pow(ray->z, 2);
 	b = 2 * (ray->x * (cam->camx - cy->x) + ray->z * (cam->camz - cy->z));
 	c = (pow(cam->camx - cy->x, 2) + pow(cam->camz - cy->z, 2) - pow(cy->r, 2));
@@ -60,7 +59,6 @@ float		calcul_cone(t_cam *cam, t_ray *ray, t_cone *cone)
 	float	c;
 	float	t[2];
 
-	rotate(ray, cone->rot);
 	a = pow(ray->x, 2) + pow(ray->z, 2) - pow(ray->y, 2) * cone->ang;
 	b = 2 * (ray->x * (cam->camx - cone->x) + ray->z *
 			(cam->camz - cone->z) - ray->y * (cam->camy - cone->y) * cone->ang);
