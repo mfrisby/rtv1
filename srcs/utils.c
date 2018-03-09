@@ -6,25 +6,11 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 10:28:27 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/03/07 14:24:40 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/03/09 13:45:27 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/rtv1.h"
-
-void        rotate(t_ray *ray, float rot)
-{
-    float xprime;
-    float yprime;
-
-	//axe y
-	//yprime = ray->y * cos(rot) - ray->z * sin(rot)
-	//zprime = ray->y * sin(rot) + ray->z * cos(rot)
-	xprime = ray->x * cos(rot) - ray->y * sin(rot);
-	yprime = ray->x * sin(rot) + ray->y * cos(rot);
-	ray->x = xprime;
-	ray->y = yprime;
-}
 
 int			key_hook(int keycode, t_data *data)
 {
@@ -53,22 +39,22 @@ t_ray		*get_intersection(t_cam *cam, t_ray *ray, float d)
 
 int			*get_color(int *color, int *rgb, t_light *l, float dot)
 {
-	if (dot >= 0.0 && dot <= 1.0)
+	if (dot > 1)
+		dot = 1;
+	if (dot > 0.0)
 	{
 		if (rgb[0] > 0)
-			color[0] += (rgb[0] + l->color[0]) * dot * l->coef;
+			color[0] += rgb[0] * dot * l->coef;
 		if (rgb[1] > 0)
-			color[1] += (rgb[1] + l->color[1]) * dot * l->coef;
+			color[1] += rgb[1] * dot * l->coef;
 		if (rgb[2] > 0)
-			color[2] += (rgb[2] + l->color[2]) * dot * l->coef;
-		if (color[0] > 255)
-			color[0] = 255;
-		if (color[1] > 255)
-			color[1] = 255;
-		if (color[2] > 255)
-			color[2] = 255;
+			color[2] += rgb[2] * dot * l->coef;
 	}
 	return (color);
+}
+
+float get_dot(t_ray *r1, t_ray *r2){
+	return((r1->x * r2->x) + (r1->y * r2->y) + (r1->z * r2->z));
 }
 
 t_ray		*normalize(t_ray *r)
