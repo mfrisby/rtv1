@@ -6,7 +6,7 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 10:31:40 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/03/07 13:47:10 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/03/09 13:54:48 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ static void			raytrace(t_ray *ray, t_data *data, int x, int y)
 	max_d = while_cone(data, ray, &rgb, max_d);
 	if (max_d > 0 && max_d < 3.4028234664e+37)
 	{
-		data->ray = ray;
 		color = while_light(rgb, data);
 		mlx_pixel_put(data->mlx, data->win, x, y, color);
 	}

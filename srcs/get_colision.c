@@ -6,7 +6,7 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 17:25:10 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/03/07 14:05:14 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/03/09 10:23:30 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,11 @@ static int		colision_cylindre(t_ray *r, t_data *data)
 	float		d;
 	t_cam		fakecam;
 	t_cylindre	*cylindre;
+	t_ray tmp;
 
+	tmp.x = r->x;
+	tmp.y = r->y;
+	tmp.z = r->z;
 	fakecam.camx = data->intersection->x;
 	fakecam.camy = data->intersection->y;
 	fakecam.camz = data->intersection->z;
@@ -72,7 +76,7 @@ static int		colision_cylindre(t_ray *r, t_data *data)
 	{
 		if (cylindre != data->current)
 		{
-			d = calcul_cylindre(&fakecam, r, cylindre);
+			d = calcul_cylindre(&fakecam, &tmp, cylindre);
 			if (d > 0 && d < data->max_d)
 				return (-1);
 		}
