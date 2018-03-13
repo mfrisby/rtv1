@@ -6,7 +6,7 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 17:03:41 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/03/07 10:02:00 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/03/13 11:07:09 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,19 @@ static int	get_attribu(char **tab, int i, t_light *light)
 	if (!tab2 || !tab2[0] || !tab2[1])
 		return (-1);
 	if (ft_strcmp(tab2[0], "pos") == 0
-		&& get_pos(tab2[1], light) == -1)
+			&& get_pos(tab2[1], light) == -1)
 		return (-1);
 	else if (ft_strcmp(tab2[0], "coef") == 0)
 	{
 		light->coef = ft_getfloat(tab2[1]);
 		if (light->coef < 0.1f)
-			ft_putendl("\033[0;33mWarning: A spot has light coef less than 0.1f.\033[0m");
+		{
+			ft_putendl("\033[0;33mWarning: A spot has light");
+			ft_putendl("coef less than 0.1f.\033[0m");
+		}
 	}
 	else if (ft_strcmp(tab2[0], "color") == 0
-		&& get_col(tab2[1], light) == -1)
+			&& get_col(tab2[1], light) == -1)
 		return (-1);
 	free(tab2[0]);
 	free(tab2[1]);

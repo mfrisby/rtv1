@@ -6,7 +6,7 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 17:16:48 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/03/13 10:21:03 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/03/13 11:07:37 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ float		calcul_cylindre(t_cam *cam, t_ray *ray, t_cylindre *cy)
 		return (t[1]);
 	}
 	else if (delta == 0)
-	 	return (b / (2 * a));
+		return (b / (2 * a));
 	return (-1);
 }
 
