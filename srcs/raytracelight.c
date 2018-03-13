@@ -6,7 +6,7 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 10:36:03 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/03/13 11:00:14 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/03/13 11:47:19 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,18 @@ static t_ray	*init_ray_light_spec(t_ray *r, t_data *data, t_light *l)
 
 static float	get_specular_dot(t_ray *l, float dot, t_data *data)
 {
-	t_ray *r;
+	float	longueur;
+	t_ray r;
 
-	r = malloc(sizeof(t_ray));
-	r->x = 2.0f * dot * data->object_norme->x - l->x;
-	r->y = 2.0f * dot * data->object_norme->y - l->y;
-	r->z = 2.0f * dot * data->object_norme->z - l->z;
-	r = normalize(r);
-	return ((r->x * data->object_norme->x) + (r->y * data->object_norme->y)
-			+ (r->z * data->object_norme->z));
+	r.x = 2.0f * dot * data->object_norme->x - l->x;
+	r.y = 2.0f * dot * data->object_norme->y - l->y;
+	r.z = 2.0f * dot * data->object_norme->z - l->z;
+	longueur = sqrt((float)((r.x * r.x) + (r.y * r.y) + (r.z * r.z)));
+	r.x /= longueur;
+	r.y /= longueur;
+	r.z /= longueur;
+	return ((r.x * data->object_norme->x) + (r.y * data->object_norme->y)
+			+ (r.z * data->object_norme->z));
 }
 
 int				*get_color_specular(int *color, int *rgblight, float dot)
@@ -58,19 +61,17 @@ int				*get_color_specular(int *color, int *rgblight, float dot)
 	return (color);
 }
 
-int				while_light(int *rgb, t_data *data)
+int				while_light(int *rgb, t_ray *light_ray, t_data *data)
 {
 	float		dot;
 	int			*color;
-	t_light		*light;
-	t_ray		*light_ray;
+	t_light			*light;
 
-	light_ray = malloc(sizeof(t_ray));
+	light = data->light_head;
 	color = malloc(sizeof(int) * 3);
 	color[0] = 0;
 	color[1] = 0;
 	color[2] = 0;
-	light = data->light_head;
 	data->object_norme = normalize(data->object_norme);
 	while (light)
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   while_objects.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfrisby <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 11:05:21 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/03/13 11:06:25 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/03/13 11:55:07 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ float			while_cone(t_data *data, t_ray *ray, int **rgb, float max_d)
 		{
 			max_d = d;
 			data->max_d = d;
-			data->intersection = get_intersection(data->cam, ray, max_d);
+			get_intersection(data, ray, max_d);
 			data->object_norme->x = data->intersection->x - c->x;
-			data->object_norme->y = max_d / cos(c->ang * c->r);
+			data->object_norme->y = 0;//max_d / cos(c->ang * c->r);
 			data->object_norme->z = data->intersection->z - c->z;
 			*rgb = c->color;
 			data->current = c;
@@ -52,7 +52,7 @@ float			while_sphere(t_data *data, t_ray *ray, int **rgb, float max_d)
 		{
 			max_d = d;
 			data->max_d = d;
-			data->intersection = get_intersection(data->cam, ray, max_d);
+			get_intersection(data, ray, max_d);
 			data->object_norme->x = data->intersection->x - s->x;
 			data->object_norme->y = data->intersection->y - s->y;
 			data->object_norme->z = data->intersection->z - s->z;
@@ -78,7 +78,7 @@ float			while_plan(t_data *data, t_ray *ray, int **rgb, float max_d)
 		{
 			max_d = d;
 			data->max_d = d;
-			data->intersection = get_intersection(data->cam, ray, max_d);
+			get_intersection(data, ray, max_d);
 			data->object_norme->x = p->dirx;
 			data->object_norme->y = p->diry;
 			data->object_norme->z = p->dirz;
@@ -104,7 +104,7 @@ float			while_cylindre(t_data *data, t_ray *ray, int **rgb, float max_d)
 		{
 			max_d = d;
 			data->max_d = d;
-			data->intersection = get_intersection(data->cam, ray, max_d);
+			get_intersection(data, ray, max_d);
 			data->object_norme->x = data->intersection->x - c->x;
 			data->object_norme->y = 0;
 			data->object_norme->z = data->intersection->z - c->z;

@@ -6,7 +6,7 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 17:42:21 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/03/08 13:02:37 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/03/13 11:56:55 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ t_data			*init_data(void)
 	data->mlx = NULL;
 	data->win = NULL;
 	data->current = NULL;
+	data->intersection = malloc(sizeof(t_ray));
 	return (data);
 }
 
@@ -94,6 +95,7 @@ int				main(int ac, char **av)
 	ft_putendl("\033[0;32mInit OK; Please use escape key to quit.\033[0m");
 	rayloop(data, upleft, pix);
 	mlx_loop(data->mlx);
+	mlx_destroy_window(data->mlx, data->win);
 	free_heads(data);
 	return (0);
 }

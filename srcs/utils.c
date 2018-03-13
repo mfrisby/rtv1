@@ -6,7 +6,7 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 10:28:27 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/03/13 11:02:24 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/03/13 11:55:54 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,11 @@ int			key_hook(int keycode, t_data *data)
 	return (0);
 }
 
-t_ray		*get_intersection(t_cam *cam, t_ray *ray, float d)
+void		get_intersection(t_data *data, t_ray *ray, float d)
 {
-	t_ray	*intersection;
-
-	if ((intersection = malloc(sizeof(t_ray))) == NULL)
-	{
-		ft_putendl(strerror(errno));
-		exit(0);
-	}
-	intersection->x = cam->camx + ray->x * d;
-	intersection->y = cam->camy + ray->y * d;
-	intersection->z = cam->camz + ray->z * d;
-	return (intersection);
+	data->intersection->x = data->cam->camx + ray->x * d;
+	data->intersection->y = data->cam->camy + ray->y * d;
+	data->intersection->z = data->cam->camz + ray->z * d;
 }
 
 int			*get_color(int *color, int *rgb, t_light *l, float dot)
