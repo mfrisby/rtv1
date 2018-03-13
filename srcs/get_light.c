@@ -6,7 +6,7 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 17:03:41 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/03/13 11:07:09 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/03/13 14:37:05 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,10 @@ static int	get_pos(char *s, t_light *light)
 	tab = ft_strsplit(s, ',');
 	if (!tab || !tab[0] || !tab[1] || !tab[2])
 		return (-1);
-	light->x = ft_getfloat(tab[0]);
-	light->y = ft_getfloat(tab[1]);
-	light->z = ft_getfloat(tab[2]);
+	light->x = ft_atof(tab[0]);
+	light->y = ft_atof(tab[1]);
+	light->z = ft_atof(tab[2]);
+	printf("%f %f %f\n", light->x, light->y, light->z);
 	free(tab[0]);
 	free(tab[1]);
 	free(tab[2]);
@@ -58,7 +59,7 @@ static int	get_attribu(char **tab, int i, t_light *light)
 		return (-1);
 	else if (ft_strcmp(tab2[0], "coef") == 0)
 	{
-		light->coef = ft_getfloat(tab2[1]);
+		light->coef = ft_atof(tab2[1]);
 		if (light->coef < 0.1f)
 		{
 			ft_putendl("\033[0;33mWarning: A spot has light");

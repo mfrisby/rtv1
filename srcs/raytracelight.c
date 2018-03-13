@@ -6,7 +6,7 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 10:36:03 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/03/13 11:47:19 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/03/13 14:19:34 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,15 @@ static t_ray	*init_ray_light_spec(t_ray *r, t_data *data, t_light *l)
 	return (normalize(r));
 }
 
-static float	get_specular_dot(t_ray *l, float dot, t_data *data)
+static double	get_specular_dot(t_ray *l, double dot, t_data *data)
 {
-	float	longueur;
+	double	longueur;
 	t_ray r;
 
 	r.x = 2.0f * dot * data->object_norme->x - l->x;
 	r.y = 2.0f * dot * data->object_norme->y - l->y;
 	r.z = 2.0f * dot * data->object_norme->z - l->z;
-	longueur = sqrt((float)((r.x * r.x) + (r.y * r.y) + (r.z * r.z)));
+	longueur = sqrt((double)((r.x * r.x) + (r.y * r.y) + (r.z * r.z)));
 	r.x /= longueur;
 	r.y /= longueur;
 	r.z /= longueur;
@@ -44,7 +44,7 @@ static float	get_specular_dot(t_ray *l, float dot, t_data *data)
 			+ (r.z * data->object_norme->z));
 }
 
-int				*get_color_specular(int *color, int *rgblight, float dot)
+int				*get_color_specular(int *color, int *rgblight, double dot)
 {
 	if (dot > 0.0)
 	{
@@ -63,7 +63,7 @@ int				*get_color_specular(int *color, int *rgblight, float dot)
 
 int				while_light(int *rgb, t_ray *light_ray, t_data *data)
 {
-	float		dot;
+	double		dot;
 	int			*color;
 	t_light			*light;
 

@@ -6,7 +6,7 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 17:42:21 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/03/13 11:56:55 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/03/13 14:19:34 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ void			init_space(t_cam *cam, t_pix **pix, t_upleft **upleft)
 				* (cam->fovh / 2.0f))) - (cam->vrighty * (cam->fovw / 2.0f));
 	(*upleft)->z = cam->camz + ((cam->vdirz * cam->fovd) + (cam->vupz
 				* (cam->fovh / 2.0f))) - (cam->vrightz * (cam->fovw / 2.0f));
-	(*pix)->xindent = (float)cam->fovw / (float)WIDTH;
-	(*pix)->yindent = (float)cam->fovh / (float)HEIGHT;
+	(*pix)->xindent = (double)cam->fovw / (double)WIDTH;
+	(*pix)->yindent = (double)cam->fovh / (double)HEIGHT;
 }
 
 int				main(int ac, char **av)

@@ -6,7 +6,7 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 17:05:33 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/03/07 10:21:02 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/03/13 14:34:43 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ static int		get_pos(char *s, t_sphere *sphere)
 	tab = ft_strsplit(s, ',');
 	if (!tab || !tab[0] || !tab[1] || !tab[2])
 		return (-1);
-	sphere->x = ft_getfloat(tab[0]);
-	sphere->y = ft_getfloat(tab[1]);
-	sphere->z = ft_getfloat(tab[2]);
+	sphere->x = ft_atof(tab[0]);
+	sphere->y = ft_atof(tab[1]);
+	sphere->z = ft_atof(tab[2]);
 	free(tab[0]);
 	free(tab[1]);
 	free(tab[2]);
@@ -64,9 +64,10 @@ static int		get_attribu(char **tab, int i, t_sphere *sphere)
 			return (-1);
 	}
 	else if (ft_strcmp(tab2[0], "rad") == 0)
-		sphere->r = ft_getfloat(tab2[1]);
+		sphere->r = ft_atof(tab2[1]);
 	else
 		return (-1);
+	printf("%f\n", sphere->r);
 	free(tab2[0]);
 	free(tab2[1]);
 	free(tab2);

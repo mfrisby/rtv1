@@ -6,7 +6,7 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 17:08:14 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/03/09 13:16:58 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/03/13 14:18:44 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,101 +42,101 @@
 
 typedef struct			s_cam
 {
-	float				camx;
-	float				camy;
-	float				camz;
-	float				vdirx;
-	float				vdiry;
-	float				vdirz;
-	float				vrightx;
-	float				vrighty;
-	float				vrightz;
-	float				vupx;
-	float				vupy;
-	float				vupz;
-	float				fovh;
-	float				fovw;
-	float				fovd;
+	double				camx;
+	double				camy;
+	double				camz;
+	double				vdirx;
+	double				vdiry;
+	double				vdirz;
+	double				vrightx;
+	double				vrighty;
+	double				vrightz;
+	double				vupx;
+	double				vupy;
+	double				vupz;
+	double				fovh;
+	double				fovw;
+	double				fovd;
 	int					is_init;
 }						t_cam;
 
 typedef struct			s_light
 {
 	int					color[3];
-	float				x;
-	float				y;
-	float				z;
-	float				coef;
+	double				x;
+	double				y;
+	double				z;
+	double				coef;
 	struct s_light		*next;
 }						t_light;
 
 typedef struct			s_sphere
 {
 	int					color[3];
-	float				x;
-	float				y;
-	float				z;
-	float				r;
+	double				x;
+	double				y;
+	double				z;
+	double				r;
 	struct s_sphere		*next;
 }						t_sphere;
 
 typedef struct			s_cylindre
 {
 	int					color[3];
-	float				x;
-	float				y;
-	float				z;
-	float				r;
-	float				rot;
+	double				x;
+	double				y;
+	double				z;
+	double				r;
+	double				rot;
 	struct s_cylindre	*next;
 }						t_cylindre;
 
 typedef struct			s_cone
 {
 	int					color[3];
-	float				x;
-	float				y;
-	float				z;
-	float				ang;
-	float				rot;
+	double				x;
+	double				y;
+	double				z;
+	double				ang;
+	double				rot;
 	struct s_cone		*next;
 }						t_cone;
 
 typedef struct			s_plan
 {
 	int					color[3];
-	float				x;
-	float				y;
-	float				z;
-	float				dirx;
-	float				diry;
-	float				dirz;
+	double				x;
+	double				y;
+	double				z;
+	double				dirx;
+	double				diry;
+	double				dirz;
 	struct s_plan		*next;
 }						t_plan;
 
 typedef struct			s_upleft
 {
-	float				x;
-	float				y;
-	float				z;
+	double				x;
+	double				y;
+	double				z;
 }						t_upleft;
 
 typedef struct			s_ray
 {
-	float				x;
-	float				y;
-	float				z;
+	double				x;
+	double				y;
+	double				z;
 }						t_ray;
 
 typedef struct			s_pix
 {
-	float				xindent;
-	float				yindent;
+	double				xindent;
+	double				yindent;
 }						t_pix;
 
 typedef struct			s_data
 {
-	float				max_d;
+	double				max_d;
 	struct s_sphere		*sphere_head;
 	struct s_light		*light_head;
 	struct s_plan		*plan_head;
@@ -152,18 +152,18 @@ typedef struct			s_data
 }						t_data;
 
 void					rayloop(t_data *data, t_upleft *upleft, t_pix *pix);
-float					calcul_sphere(t_cam *cam, t_ray *ray, t_sphere *sphere);
-float					calcul_plan(t_cam *cam, t_ray *ray, t_plan *plan);
-float					calcul_cylindre(t_cam *cam, t_ray *ray, t_cylindre *c);
-float					calcul_cone(t_cam *cam, t_ray *ray, t_cone *cone);
-float					while_plan(t_data *data, t_ray *ray,
-						int **rgb, float max_d);
-float					while_sphere(t_data *data, t_ray *ray,
-						int **rgb, float max_d);
-float					while_cylindre(t_data *data, t_ray *ray,
-						int **rgb, float max_d);
-float					while_cone(t_data *data, t_ray *ray,
-						int **rgb, float max_d);
+double					calcul_sphere(t_cam *cam, t_ray *ray, t_sphere *sphere);
+double					calcul_plan(t_cam *cam, t_ray *ray, t_plan *plan);
+double					calcul_cylindre(t_cam *cam, t_ray *ray, t_cylindre *c);
+double					calcul_cone(t_cam *cam, t_ray *ray, t_cone *cone);
+double					while_plan(t_data *data, t_ray *ray,
+						int **rgb, double max_d);
+double					while_sphere(t_data *data, t_ray *ray,
+						int **rgb, double max_d);
+double					while_cylindre(t_data *data, t_ray *ray,
+						int **rgb, double max_d);
+double					while_cone(t_data *data, t_ray *ray,
+						int **rgb, double max_d);
 t_cam					*get_cam(char *s);
 t_sphere				*get_sphere(char *s);
 t_plan					*get_plan(char *s);
@@ -179,9 +179,9 @@ int						add_light_lst(t_data **data, t_light *elem);
 t_ray					*normalize(t_ray *r);
 void					free_heads(t_data *data);
 int						key_hook(int keycode, t_data *data);
-t_ray					*get_intersection(t_cam *cam, t_ray *ray, float d);
-int						while_light(int *rgb, t_data *data);
-int			*get_color(int *color, int *rgb, t_light *l, float dot);
-float		get_dot(t_ray *r1, t_ray *r2);
+void					get_intersection(t_data *data, t_ray *ray, double d);
+int						while_light(int *rgb, t_ray *light_ray, t_data *data);
+int			*get_color(int *color, int *rgb, t_light *l, double dot);
+double		get_dot(t_ray *r1, t_ray *r2);
 int						get_colision(t_ray *r, t_data *data);
 #endif

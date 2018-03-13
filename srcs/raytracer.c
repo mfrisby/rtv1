@@ -6,7 +6,7 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 10:31:40 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/03/13 11:57:52 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/03/13 14:19:26 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int			raytrace(t_ray *ray, t_ray *light_ray, t_data *data)
 {
-	float			max_d;
+	double			max_d;
 	int				*rgb;
 
 	max_d = 3.4028234664e+38;

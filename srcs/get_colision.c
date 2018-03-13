@@ -6,7 +6,7 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 17:25:10 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/03/13 11:08:09 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/03/13 14:19:30 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int		colision_cone(t_ray *r, t_data *data)
 {
-	float		d;
+	double		d;
 	t_cam		fakecam;
 	t_cone		*cone;
 
@@ -37,7 +37,7 @@ static int		colision_cone(t_ray *r, t_data *data)
 
 static int		colision_sphere(t_ray *r, t_data *data)
 {
-	float		d;
+	double		d;
 	t_cam		fakecam;
 	t_sphere	*sphere;
 
@@ -60,7 +60,7 @@ static int		colision_sphere(t_ray *r, t_data *data)
 
 static int		colision_cylindre(t_ray *r, t_data *data)
 {
-	float		d;
+	double		d;
 	t_cam		fakecam;
 	t_cylindre	*cylindre;
 	t_ray		tmp;
@@ -87,7 +87,7 @@ static int		colision_cylindre(t_ray *r, t_data *data)
 
 static int		colision_plan(t_ray *r, t_data *data)
 {
-	float		d;
+	double		d;
 	t_cam		fakecam;
 	t_plan		*plan;
 

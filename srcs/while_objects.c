@@ -6,15 +6,15 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 11:05:21 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/03/13 11:55:07 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/03/13 14:19:36 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/rtv1.h"
 
-float			while_cone(t_data *data, t_ray *ray, int **rgb, float max_d)
+double			while_cone(t_data *data, t_ray *ray, int **rgb, double max_d)
 {
-	float		d;
+	double		d;
 	t_cone		*c;
 
 	d = 0;
@@ -38,9 +38,9 @@ float			while_cone(t_data *data, t_ray *ray, int **rgb, float max_d)
 	return (max_d);
 }
 
-float			while_sphere(t_data *data, t_ray *ray, int **rgb, float max_d)
+double			while_sphere(t_data *data, t_ray *ray, int **rgb, double max_d)
 {
-	float		d;
+	double		d;
 	t_sphere	*s;
 
 	d = 0;
@@ -64,9 +64,9 @@ float			while_sphere(t_data *data, t_ray *ray, int **rgb, float max_d)
 	return (max_d);
 }
 
-float			while_plan(t_data *data, t_ray *ray, int **rgb, float max_d)
+double			while_plan(t_data *data, t_ray *ray, int **rgb, double max_d)
 {
-	float		d;
+	double		d;
 	t_plan		*p;
 
 	d = 0;
@@ -90,9 +90,9 @@ float			while_plan(t_data *data, t_ray *ray, int **rgb, float max_d)
 	return (max_d);
 }
 
-float			while_cylindre(t_data *data, t_ray *ray, int **rgb, float max_d)
+double			while_cylindre(t_data *data, t_ray *ray, int **rgb, double max_d)
 {
-	float		d;
+	double		d;
 	t_cylindre	*c;
 
 	d = 0;

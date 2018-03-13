@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_cam.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfrisby <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 17:21:55 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/03/06 17:24:51 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/03/13 14:19:33 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ static int		get_pos(char *s, t_cam *cam)
 	tab = ft_strsplit(s, ',');
 	if (!tab || !tab[0] || !tab[1] || !tab[2])
 		return (-1);
-	cam->camx = (float)ft_getnbr(tab[0]) / 10;
-	cam->camy = (float)ft_getnbr(tab[1]) / 10;
-	cam->camz = (float)ft_getnbr(tab[2]) / 10;
+	cam->camx = (double)ft_getnbr(tab[0]) / 10;
+	cam->camy = (double)ft_getnbr(tab[1]) / 10;
+	cam->camz = (double)ft_getnbr(tab[2]) / 10;
 	free(tab[0]);
 	free(tab[1]);
 	free(tab[2]);
@@ -54,8 +54,8 @@ static void		sup_var(t_cam *cam)
 	cam->vupx = 0.0f;
 	cam->vupy = 1.0f;
 	cam->vupz = 0.0f;
-	cam->fovh = (float)(HEIGHT / 1000.0f);
-	cam->fovw = (float)(WIDTH / 1000.0f);
+	cam->fovh = (double)(HEIGHT / 1000.0f);
+	cam->fovw = (double)(WIDTH / 1000.0f);
 	cam->fovd = 1.0f;
 	cam->is_init = INIT;
 }

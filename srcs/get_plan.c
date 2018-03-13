@@ -6,7 +6,7 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 17:05:24 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/03/13 11:17:02 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/03/13 14:17:52 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ static int		get_pos(char *s, t_plan *plan)
 	tab = ft_strsplit(s, ',');
 	if (!tab || !tab[0] || !tab[1] || !tab[2])
 		return (-1);
-	plan->x = ft_getfloat(tab[0]);
-	plan->y = ft_getfloat(tab[1]);
-	plan->z = ft_getfloat(tab[2]);
+	plan->x = ft_atof(tab[0]);
+	plan->y = ft_atof(tab[1]);
+	plan->z = ft_atof(tab[2]);
 	free(tab[0]);
 	free(tab[1]);
 	free(tab[2]);
@@ -36,9 +36,9 @@ static int		get_dir(char *s, t_plan *plan)
 	tab = ft_strsplit(s, ',');
 	if (!tab || !tab[0] || !tab[1] || !tab[2])
 		return (-1);
-	plan->dirx = ft_getfloat(tab[0]);
-	plan->diry = ft_getfloat(tab[1]);
-	plan->dirz = ft_getfloat(tab[2]);
+	plan->dirx = ft_atof(tab[0]);
+	plan->diry = ft_atof(tab[1]);
+	plan->dirz = ft_atof(tab[2]);
 	free(tab[0]);
 	free(tab[1]);
 	free(tab[2]);

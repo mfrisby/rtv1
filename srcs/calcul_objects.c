@@ -6,16 +6,16 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 17:16:48 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/03/13 11:13:25 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/03/13 14:19:32 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/rtv1.h"
 
-float		calcul_plan(t_cam *cam, t_ray *ray, t_plan *plan)
+double		calcul_plan(t_cam *cam, t_ray *ray, t_plan *plan)
 {
-	float	d;
-	float	t;
+	double	d;
+	double	t;
 
 	d = -(plan->dirx * plan->x + plan->diry * plan->y + plan->dirz * plan->z);
 	t = -((plan->dirx * (cam->camx - plan->x) + plan->diry
@@ -25,13 +25,13 @@ float		calcul_plan(t_cam *cam, t_ray *ray, t_plan *plan)
 	return (t);
 }
 
-float		calcul_cylindre(t_cam *cam, t_ray *ray, t_cylindre *cy)
+double		calcul_cylindre(t_cam *cam, t_ray *ray, t_cylindre *cy)
 {
-	float	delta;
-	float	a;
-	float	b;
-	float	c;
-	float	t[2];
+	double	delta;
+	double	a;
+	double	b;
+	double	c;
+	double	t[2];
 
 	a = pow(ray->x, 2) + pow(ray->z, 2);
 	b = 2 * (ray->x * (cam->camx - cy->x) + ray->z * (cam->camz - cy->z));
@@ -51,13 +51,13 @@ float		calcul_cylindre(t_cam *cam, t_ray *ray, t_cylindre *cy)
 	return (-1);
 }
 
-float		calcul_cone(t_cam *cam, t_ray *ray, t_cone *cone)
+double		calcul_cone(t_cam *cam, t_ray *ray, t_cone *cone)
 {
-	float	delta;
-	float	a;
-	float	b;
-	float	c;
-	float	t[2];
+	double	delta;
+	double	a;
+	double	b;
+	double	c;
+	double	t[2];
 
 	a = pow(ray->x, 2) + pow(ray->z, 2) - pow(ray->y, 2) * cone->ang;
 	b = 2 * (ray->x * (cam->camx - cone->x) + ray->z *
@@ -79,13 +79,13 @@ float		calcul_cone(t_cam *cam, t_ray *ray, t_cone *cone)
 	return (-1);
 }
 
-float		calcul_sphere(t_cam *cam, t_ray *ray, t_sphere *sphere)
+double		calcul_sphere(t_cam *cam, t_ray *ray, t_sphere *sphere)
 {
-	float	delta;
-	float	a;
-	float	b;
-	float	c;
-	float	t[2];
+	double	delta;
+	double	a;
+	double	b;
+	double	c;
+	double	t[2];
 
 	a = pow(ray->x, 2) + pow(ray->y, 2) + pow(ray->z, 2);
 	b = 2 * (ray->x * (cam->camx - sphere->x) + ray->y *

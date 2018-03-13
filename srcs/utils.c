@@ -6,7 +6,7 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 10:28:27 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/03/13 11:55:54 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/03/13 14:19:35 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ int			key_hook(int keycode, t_data *data)
 	return (0);
 }
 
-void		get_intersection(t_data *data, t_ray *ray, float d)
+void		get_intersection(t_data *data, t_ray *ray, double d)
 {
 	data->intersection->x = data->cam->camx + ray->x * d;
 	data->intersection->y = data->cam->camy + ray->y * d;
 	data->intersection->z = data->cam->camz + ray->z * d;
 }
 
-int			*get_color(int *color, int *rgb, t_light *l, float dot)
+int			*get_color(int *color, int *rgb, t_light *l, double dot)
 {
 	if (dot > 1)
 		dot = 1;
@@ -45,16 +45,16 @@ int			*get_color(int *color, int *rgb, t_light *l, float dot)
 	return (color);
 }
 
-float		get_dot(t_ray *r1, t_ray *r2)
+double		get_dot(t_ray *r1, t_ray *r2)
 {
 	return ((r1->x * r2->x) + (r1->y * r2->y) + (r1->z * r2->z));
 }
 
 t_ray		*normalize(t_ray *r)
 {
-	float	longueur;
+	double	longueur;
 
-	longueur = sqrt((float)((r->x * r->x) + (r->y * r->y) + (r->z * r->z)));
+	longueur = sqrt((double)((r->x * r->x) + (r->y * r->y) + (r->z * r->z)));
 	r->x /= longueur;
 	r->y /= longueur;
 	r->z /= longueur;
