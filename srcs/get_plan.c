@@ -6,7 +6,7 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 17:05:24 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/03/13 11:05:16 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/03/13 11:17:02 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,6 @@ static int		get_attribu(char **tab, int i, t_plan *plan)
 	}
 	else if (ft_strcmp(tab2[0], "color") == 0
 			&& get_col(tab2[1], plan) == -1)
-		return (-1);
-	else
 		return (-1);
 	free(tab2[0]);
 	free(tab2[1]);
