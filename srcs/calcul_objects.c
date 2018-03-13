@@ -6,7 +6,7 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 17:16:48 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/03/09 10:22:15 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/03/13 10:21:03 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ float		calcul_cylindre(t_cam *cam, t_ray *ray, t_cylindre *cy)
 	{
 		t[0] = (b + sqrt(delta)) / (2 * a);
 		t[1] = (b - sqrt(delta)) / (2 * a);
-		if (t[0] <= t[1])
+		if (t[0] < t[1])
 			return (t[0]);
 		return (t[1]);
 	}

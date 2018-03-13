@@ -10,13 +10,13 @@ float while_cone(t_data *data, t_ray *ray, int **rgb, float max_d)
     while (c)
     {
         d = calcul_cone(data->cam, ray, c);
-        if (d > 0 && d < max_d)
+        if (d > 0 && d < max_d + 0.01f)
         {
             max_d = d;
             data->max_d = d;
             data->intersection = get_intersection(data->cam, ray, max_d);
             data->object_norme->x = data->intersection->x - c->x;
-            data->object_norme->y = 0;
+            data->object_norme->y = max_d / cos(c->ang * c->r);
             data->object_norme->z = data->intersection->z - c->z;
             *rgb = c->color;
             data->current = c; 
@@ -36,7 +36,7 @@ float while_sphere(t_data *data, t_ray *ray, int **rgb, float max_d)
     while (s)
     {
         d = calcul_sphere(data->cam, ray, s);
-        if (d > 0 && d < max_d)
+        if (d > 0 && d < max_d + 0.01f)
         {
             max_d = d;
             data->max_d = d;
@@ -62,7 +62,7 @@ float while_plan(t_data *data, t_ray *ray, int **rgb, float max_d)
     while (p)
     {
         d = calcul_plan(data->cam, ray, p);
-        if (d > 0 && d < max_d)
+        if (d > 0 && d < max_d + 0.01f)
         {
             max_d = d;
             data->max_d = d;
@@ -88,7 +88,7 @@ float while_cylindre(t_data *data, t_ray *ray, int **rgb, float max_d)
     while (c)
     {
         d = calcul_cylindre(data->cam, ray, c);
-        if (d > 0 && d < max_d)
+        if (d > 0 && d < max_d + 0.01f)
         {
             max_d = d;
             data->max_d = d;

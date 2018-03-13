@@ -6,7 +6,7 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 10:28:27 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/03/09 13:45:27 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/03/13 11:02:24 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_ray		*get_intersection(t_cam *cam, t_ray *ray, float d)
 	{
 		ft_putendl(strerror(errno));
 		exit(0);
-    }
+	}
 	intersection->x = cam->camx + ray->x * d;
 	intersection->y = cam->camy + ray->y * d;
 	intersection->z = cam->camz + ray->z * d;
@@ -53,8 +53,9 @@ int			*get_color(int *color, int *rgb, t_light *l, float dot)
 	return (color);
 }
 
-float get_dot(t_ray *r1, t_ray *r2){
-	return((r1->x * r2->x) + (r1->y * r2->y) + (r1->z * r2->z));
+float		get_dot(t_ray *r1, t_ray *r2)
+{
+	return ((r1->x * r2->x) + (r1->y * r2->y) + (r1->z * r2->z));
 }
 
 t_ray		*normalize(t_ray *r)

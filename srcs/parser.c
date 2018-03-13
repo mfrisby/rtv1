@@ -6,13 +6,13 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 17:04:58 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/02/28 10:54:18 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/03/13 10:57:24 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/rtv1.h"
 
-static int get_object(char *s, int type, t_data **data)
+static int	get_object(char *s, int type, t_data **data)
 {
 	if (type == CAM)
 		(*data)->cam = get_cam(s);
@@ -21,16 +21,12 @@ static int get_object(char *s, int type, t_data **data)
 		if ((add_sphere_lst(data, get_sphere(s))) == -1)
 			return (-1);
 	}
-	else if (type == PLAN)
-	{
-		if ((add_plan_lst(data, get_plan(s))) == -1)
-			return (-1);
-	}
-	else if (type == CYLINDRE)
-	{
-		if ((add_cylindre_lst(data, get_cylindre(s))) == -1)
-			return (-1);
-	}
+	else if (type == PLAN
+			&& (add_plan_lst(data, get_plan(s))) == -1)
+		return (-1);
+	else if (type == CYLINDRE
+			&& (add_cylindre_lst(data, get_cylindre(s))) == -1)
+		return (-1);
 	else if (type == CONE)
 	{
 		if ((add_cone_lst(data, get_cone(s))) == -1)
@@ -44,7 +40,7 @@ static int get_object(char *s, int type, t_data **data)
 	return (0);
 }
 
-static int parse(char *s, int *type, t_data **data)
+static int	parse(char *s, int *type, t_data **data)
 {
 	if (ft_strcmp(s, "[cam]") == 0)
 		*type = CAM;
@@ -70,17 +66,17 @@ static int parse(char *s, int *type, t_data **data)
 	return (0);
 }
 
-static int read_file(int fd, t_data **data)
+static int	read_file(int fd, t_data **data)
 {
-	int     type;
-	char *buf;
+	int		type;
+	char	*buf;
 
 	type = -1;
 	buf = NULL;
 	while (get_next_line(fd, &buf))
 	{
 		if (!buf || ft_strlen(buf) <= 0)
-			break;
+			break ;
 		else if (buf[0] == '#')
 			continue;
 		if (parse(buf, &type, data) == -1)
@@ -89,22 +85,22 @@ static int read_file(int fd, t_data **data)
 	return (0);
 }
 
-static int  open_file(char *file)
+static int	open_file(char *file)
 {
-	int fd;
+	int		fd;
 
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 	{
-		ft_printf("\033[0;31mError: %s\033[0m",strerror(errno));
+		ft_printf("\033[0;31mError: %s\033[0m", strerror(errno));
 		exit(0);
 	}
 	return (fd);
 }
 
-int    parse_file(char *file, t_data **data)
+int			parse_file(char *file, t_data **data)
 {
-	int fd;
+	int		fd;
 
 	ft_putendl("Parse file.");
 	if (!file || ft_strlen(file) <= 0)
@@ -114,7 +110,8 @@ int    parse_file(char *file, t_data **data)
 		return (-1);
 	if ((*data)->cam == NULL || (*data)->cam->is_init == NOTINIT)
 	{
-		ft_putendl("\033[0;31mError : you need to add cam in your config file; Format:\033[0m");
+		ft_putendl("\033[0;31mError : you need to add a camera");
+		ft_putendl("in your config file; Format:\033[0m");
 		ft_putendl("[cam]\npos:x,y,z;dir:x,y,z");
 		exit(0);
 	}
