@@ -6,7 +6,7 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 17:08:14 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/03/13 14:18:44 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/03/14 11:22:38 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,9 @@ typedef struct			s_cylindre
 	double				y;
 	double				z;
 	double				r;
+	double				dirx;
+	double				diry;
+	double				dirz;
 	double				rot;
 	struct s_cylindre	*next;
 }						t_cylindre;
@@ -97,6 +100,9 @@ typedef struct			s_cone
 	double				x;
 	double				y;
 	double				z;
+	double				dirx;
+	double				diry;
+	double				dirz;
 	double				ang;
 	double				rot;
 	struct s_cone		*next;
