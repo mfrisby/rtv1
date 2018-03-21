@@ -6,7 +6,7 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 17:21:55 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/03/13 14:19:33 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/03/21 11:50:47 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ static void		sup_var(t_cam *cam)
 	cam->vupx = 0.0f;
 	cam->vupy = 1.0f;
 	cam->vupz = 0.0f;
-	cam->fovh = (double)(HEIGHT / 1000.0f);
-	cam->fovw = (double)(WIDTH / 1000.0f);
-	cam->fovd = 1.0f;
+	cam->fovh = 1.0;
+	cam->fovw = 1.0;
+	cam->fovd = 0.8;
 	cam->is_init = INIT;
 }
 
