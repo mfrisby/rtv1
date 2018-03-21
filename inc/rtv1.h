@@ -6,7 +6,7 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 17:08:14 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/03/14 11:22:38 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/03/21 11:51:10 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # include <errno.h>
 
 # define WIDTH 700
-# define HEIGHT 500
+# define HEIGHT 700
 
 # define COLORBLUE 4349940
 # define COLORRED 16204611
