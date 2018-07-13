@@ -6,7 +6,7 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 17:08:14 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/07/13 13:01:36 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/07/13 13:54:48 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,6 @@ typedef struct			s_cylindre
 	double				y;
 	double				z;
 	double				r;
-	double				dirx;
-	double				diry;
-	double				dirz;
 	double				rot;
 	double				ang;
 	struct s_cylindre	*next;
@@ -101,9 +98,6 @@ typedef struct			s_cone
 	double				x;
 	double				y;
 	double				z;
-	double				dirx;
-	double				diry;
-	double				dirz;
 	double				ang;
 	double				rot;
 	struct s_cone		*next;
@@ -193,4 +187,5 @@ int						*get_color(int *color, int *rgb, t_light *l,
 double					get_dot(t_ray *r1, t_ray *r2);
 int						get_colision(t_ray *r, t_data *data);
 void					get_rotation(t_cylindre *cy, t_cone *co);
+void					rotate(t_ray *ray, float rot);
 #endif

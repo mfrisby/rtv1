@@ -1,12 +1,12 @@
 [cam]
 pos:0,0,0;dir:0,0,-1
 [light]
-pos:2,3,1;coef:1;color:255,255,255
+pos:0,3,1;coef:1;color:255,255,255
 [sphere]
 pos:1,1,-6;rad:1;color:0,255,255
 [plan]
 pos:0,-1,-1;dir:0,1,0;color:200,255,0
 [cylindre]
-pos:1,0,-6;dir:1,1,0;rad:2;color:0,255,0
+pos:1,0,-6;rad:2;rot:23;color:0,255,0
 [cone]
-pos:-1,0,-7;ang:30;dir:1,0,0;color:255,55,50
+pos:-1,0,-7;ang:30;rot:23;color:255,55,50
