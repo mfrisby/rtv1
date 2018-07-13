@@ -6,7 +6,7 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 17:08:14 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/03/21 11:51:10 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/04/27 15:13:01 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,16 @@ typedef struct			s_cam
 	int					is_init;
 }						t_cam;
 
+
+typedef struct			s_quater
+{
+	double				w;
+	double				x;
+	double				y;
+	double				z;
+}						t_quater;
+
+
 typedef struct			s_light
 {
 	int					color[3];
@@ -91,7 +101,9 @@ typedef struct			s_cylindre
 	double				diry;
 	double				dirz;
 	double				rot;
+	double				ang;
 	struct s_cylindre	*next;
+	struct s_quater		*quat;
 }						t_cylindre;
 
 typedef struct			s_cone
@@ -106,6 +118,7 @@ typedef struct			s_cone
 	double				ang;
 	double				rot;
 	struct s_cone		*next;
+	struct s_quater		*quat;
 }						t_cone;
 
 typedef struct			s_plan
@@ -157,19 +170,19 @@ typedef struct			s_data
 	void				*win;
 }						t_data;
 
-void					rayloop(t_data *data, t_upleft *upleft, t_pix *pix);
+void					rayloop(t_data *da, t_upleft *upleft, t_pix *pix);
 double					calcul_sphere(t_cam *cam, t_ray *ray, t_sphere *sphere);
 double					calcul_plan(t_cam *cam, t_ray *ray, t_plan *plan);
 double					calcul_cylindre(t_cam *cam, t_ray *ray, t_cylindre *c);
 double					calcul_cone(t_cam *cam, t_ray *ray, t_cone *cone);
 double					while_plan(t_data *data, t_ray *ray,
-						int **rgb, double max_d);
+							int **rgb, double max_d);
 double					while_sphere(t_data *data, t_ray *ray,
-						int **rgb, double max_d);
-double					while_cylindre(t_data *data, t_ray *ray,
-						int **rgb, double max_d);
+							int **rgb, double max_d);
+double					while_cylindre(t_data *da, t_ray *ray,
+							int **rgb, double max_d);
 double					while_cone(t_data *data, t_ray *ray,
-						int **rgb, double max_d);
+							int **rgb, double max_d);
 t_cam					*get_cam(char *s);
 t_sphere				*get_sphere(char *s);
 t_plan					*get_plan(char *s);
@@ -187,7 +200,9 @@ void					free_heads(t_data *data);
 int						key_hook(int keycode, t_data *data);
 void					get_intersection(t_data *data, t_ray *ray, double d);
 int						while_light(int *rgb, t_ray *light_ray, t_data *data);
-int			*get_color(int *color, int *rgb, t_light *l, double dot);
-double		get_dot(t_ray *r1, t_ray *r2);
+int						*get_color(int *color, int *rgb, t_light *l,
+							double dot);
+double					get_dot(t_ray *r1, t_ray *r2);
 int						get_colision(t_ray *r, t_data *data);
+void					get_rotation(t_cylindre *cy, t_cone *co);
 #endif

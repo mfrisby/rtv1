@@ -6,7 +6,7 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 11:05:21 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/03/13 14:19:36 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/04/27 13:19:32 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ double			while_cone(t_data *data, t_ray *ray, int **rgb, double max_d)
 			data->max_d = d;
 			get_intersection(data, ray, max_d);
 			data->object_norme->x = data->intersection->x - c->x;
-			data->object_norme->y = 0;//max_d / cos(c->ang * c->r);
+			data->object_norme->y = 0;
 			data->object_norme->z = data->intersection->z - c->z;
 			*rgb = c->color;
 			data->current = c;
@@ -90,26 +90,26 @@ double			while_plan(t_data *data, t_ray *ray, int **rgb, double max_d)
 	return (max_d);
 }
 
-double			while_cylindre(t_data *data, t_ray *ray, int **rgb, double max_d)
+double			while_cylindre(t_data *da, t_ray *ray, int **rgb, double max_d)
 {
 	double		d;
 	t_cylindre	*c;
 
 	d = 0;
-	c = data->cylindre_head;
+	c = da->cylindre_head;
 	while (c)
 	{
-		d = calcul_cylindre(data->cam, ray, c);
+		d = calcul_cylindre(da->cam, ray, c);
 		if (d > 0 && d < max_d + 0.01f)
 		{
 			max_d = d;
-			data->max_d = d;
-			get_intersection(data, ray, max_d);
-			data->object_norme->x = data->intersection->x - c->x;
-			data->object_norme->y = 0;
-			data->object_norme->z = data->intersection->z - c->z;
+			da->max_d = d;
+			get_intersection(da, ray, max_d);
+			da->object_norme->x = da->intersection->x - c->x;
+			da->object_norme->y = 0;
+			da->object_norme->z = da->intersection->z - c->z;
 			*rgb = c->color;
-			data->current = c;
+			da->current = c;
 		}
 		c = c->next;
 	}

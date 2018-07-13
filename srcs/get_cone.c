@@ -6,7 +6,7 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 17:27:20 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/03/14 11:28:25 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/04/27 16:27:45 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ static int		get_attribu(char **tab, int i, t_cone *cone)
 		return (-1);
 	else if (ft_strcmp(tab2[0], "ang") == 0)
 		cone->ang = pow(tan(ft_getnbr(tab2[1]) * 0.0174533f), 2);
-	else if (ft_strcmp(tab2[0], "rot") == 0)
-		cone->rot = 3.14f * ft_getnbr(tab2[1]) / 180.0;
+	// else if (ft_strcmp(tab2[0], "rot") == 0)
+	// 	cone->rot = 3.14f * ft_getnbr(tab2[1]) / 180.0;
 	else if (ft_strcmp(tab2[0], "color") == 0
 		&& get_col(tab2[1], cone) == -1)
 		return (-1);
@@ -115,5 +115,6 @@ t_cone			*get_cone(char *s)
 		i++;
 	}
 	free(tab);
+	get_rotation(NULL, cone);
 	return (cone);
 }

@@ -6,7 +6,7 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 17:28:45 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/03/14 11:27:14 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/04/27 16:34:49 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,16 @@ static int		get_pos(char *s, t_cylindre *cylindre)
 	tab = ft_strsplit(s, ',');
 	if (!tab || !tab[0] || !tab[1] || !tab[2])
 		return (-1);
-	cylindre->x = ft_atof(tab[0]);
-	cylindre->y = ft_atof(tab[1]);
-	cylindre->z = ft_atof(tab[2]);
+	cylindre->x = ft_getnbr(tab[0]);
+	cylindre->y = ft_getnbr(tab[1]);
+	cylindre->z = ft_getnbr(tab[2]);
 	free(tab[0]);
 	free(tab[1]);
 	free(tab[2]);
 	free(tab);
 	return (0);
 }
+
 static int		get_dir(char *s, t_cylindre *cylindre)
 {
 	char		**tab;
@@ -35,9 +36,9 @@ static int		get_dir(char *s, t_cylindre *cylindre)
 	tab = ft_strsplit(s, ',');
 	if (!tab || !tab[0] || !tab[1] || !tab[2])
 		return (-1);
-	cylindre->dirx = ft_atof(tab[0]);
-	cylindre->diry = ft_atof(tab[1]);
-	cylindre->dirz = ft_atof(tab[2]);
+	cylindre->dirx = ft_getnbr(tab[0]);
+	cylindre->diry = ft_getnbr(tab[1]);
+	cylindre->dirz = ft_getnbr(tab[2]);
 	free(tab[0]);
 	free(tab[1]);
 	free(tab[2]);
@@ -72,10 +73,12 @@ static int		get_attribu(char **tab, int i, t_cylindre *cylindre)
 	if (ft_strcmp(tab2[0], "pos") == 0
 		&& get_pos(tab2[1], cylindre) == -1)
 		return (-1);
-	else if (ft_strcmp(tab2[0], "rot") == 0)
-		cylindre->rot = 3.14f * ft_getnbr(tab2[1]) / 180.0f;
+	// else if (ft_strcmp(tab2[0], "rot") == 0)
+	// 	cylindre->rot = 3.14f * ft_getnbr(tab2[1]) / 180.0f;
 	else if (ft_strcmp(tab2[0], "rad") == 0)
-		cylindre->r = ft_atof(tab2[1]);
+		cylindre->r = (double)ft_getnbr(tab2[1]) / 10.0;
+	else if (ft_strcmp(tab2[0], "ang") == 0)
+		cylindre->ang = ft_getnbr(tab2[1]);
 	else if (ft_strcmp(tab2[0], "dir") == 0
 		&& get_dir(tab2[1], cylindre) == -1)
 		return (-1);
@@ -114,5 +117,6 @@ t_cylindre		*get_cylindre(char *s)
 		i++;
 	}
 	free(tab);
+	get_rotation(cylindre, NULL);
 	return (cylindre);
 }

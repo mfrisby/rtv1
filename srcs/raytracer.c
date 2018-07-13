@@ -6,11 +6,23 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 10:31:40 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/03/13 14:19:26 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/04/11 15:22:18 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/rtv1.h"
+
+static void			free_norme(t_ray *r, t_ray *light_ray)
+{
+	free(r);
+	free(light_ray);
+}
+
+static void			malloc_norme(t_ray **r, t_ray **light_ray)
+{
+	*r = malloc(sizeof(t_ray));
+	*light_ray = malloc(sizeof(t_ray));
+}
 
 static int			raytrace(t_ray *ray, t_ray *light_ray, t_data *data)
 {
@@ -29,34 +41,30 @@ static int			raytrace(t_ray *ray, t_ray *light_ray, t_data *data)
 	return (0);
 }
 
-void				rayloop(t_data *data, t_upleft *upleft, t_pix *pix)
+void				rayloop(t_data *da, t_upleft *upleft, t_pix *pix)
 {
 	int				x;
 	int				y;
-	t_ray			*ray;
+	t_ray			*r;
 	t_ray			*light_ray;
 
-	ray = malloc(sizeof(t_ray));
-	light_ray = malloc(sizeof(t_ray));
-	y = 0;
-	while (y < HEIGHT)
+	malloc_norme(&r, &light_ray);
+	y = -1;
+	while (y++ < HEIGHT)
 	{
-		x = 0;
-		while (x < WIDTH)
+		x = -1;
+		while (x++ < WIDTH)
 		{
-			mlx_hook(data->win, 3, 3, key_hook, data);
-			ray->x = upleft->x + data->cam->vrightx * pix->xindent
-				* x - data->cam->vupx * pix->yindent * y;
-			ray->y = upleft->y + data->cam->vrighty * pix->xindent
-				* x - data->cam->vupy * pix->yindent * y;
-			ray->z = upleft->z + data->cam->vrightz * pix->xindent
-				* x - data->cam->vupz * pix->yindent * y;
-			ray = normalize(ray);
-			mlx_pixel_put(data->mlx, data->win, x, y, raytrace(ray, light_ray, data));
-			x++;
+			mlx_hook(da->win, 3, 3, key_hook, da);
+			r->x = upleft->x + da->cam->vrightx * pix->xindent
+				* x - da->cam->vupx * pix->yindent * y;
+			r->y = upleft->y + da->cam->vrighty * pix->xindent
+				* x - da->cam->vupy * pix->yindent * y;
+			r->z = upleft->z + da->cam->vrightz * pix->xindent
+				* x - da->cam->vupz * pix->yindent * y;
+			r = normalize(r);
+			mlx_pixel_put(da->mlx, da->win, x, y, raytrace(r, light_ray, da));
 		}
-		y++;
 	}
-	free(ray);
-	free(light_ray);
+	free_norme(r, light_ray);
 }

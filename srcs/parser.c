@@ -6,7 +6,7 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 17:04:58 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/03/13 10:57:24 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/04/27 16:10:22 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,16 @@ static int	get_object(char *s, int type, t_data **data)
 		if ((add_sphere_lst(data, get_sphere(s))) == -1)
 			return (-1);
 	}
-	else if (type == PLAN
-			&& (add_plan_lst(data, get_plan(s))) == -1)
-		return (-1);
-	else if (type == CYLINDRE
-			&& (add_cylindre_lst(data, get_cylindre(s))) == -1)
-		return (-1);
+	else if (type == PLAN)
+	{
+		if ((add_plan_lst(data, get_plan(s))) == -1)
+			return (-1);
+	}
+	else if (type == CYLINDRE)
+	{
+		if ((add_cylindre_lst(data, get_cylindre(s))) == -1)
+			return (-1);
+	} 
 	else if (type == CONE)
 	{
 		if ((add_cone_lst(data, get_cone(s))) == -1)

@@ -6,7 +6,7 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 17:16:48 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/03/21 11:53:20 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/07/13 12:41:05 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,22 +32,25 @@ double		calcul_cylindre(t_cam *cam, t_ray *ray, t_cylindre *cy)
 	float	b;
 	float	c;
 	float	t[2];
-
+	
 	a = pow(ray->x, 2) + pow(ray->z, 2);
 	b = 2 * (ray->x * (cam->camx - cy->x) + ray->z * (cam->camz - cy->z));
 	c = (pow(cam->camx - cy->x, 2) + pow(cam->camz - cy->z, 2) - pow(cy->r, 2));
 	delta = (b * b) - 4 * a * c;
-	b = -b;
+	//b = -b;
 	if (delta > 0.0f)
 	{
-		t[0] = (b + sqrt(delta)) / (2 * a);
-		t[1] = (b - sqrt(delta)) / (2 * a);
-		if (t[0] <= t[1])
+		if (a == 0)
+			a = a + 0.000000000000001;
+		t[0] = (-1 * (b) + sqrt(delta)) / (2.0 * a);
+		t[1] = (-1 * (b) - sqrt(delta)) / (2.0 * a);
+		if (t[0] < t[1] && t[0] >= 0)
 			return (t[0]);
-		return (t[1]);
+		else if (t[1] <= t[0] && t[1] >= 0)
+			return (t[1]);
+		else
+			return (-1);
 	}
-	else if (delta == 0)
-	 	return (b / (2 * a));
 	return (-1);
 }
 

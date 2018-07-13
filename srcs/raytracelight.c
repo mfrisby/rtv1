@@ -6,7 +6,7 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 10:36:03 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/03/13 14:19:34 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/04/11 15:26:29 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ static t_ray	*init_ray_light_spec(t_ray *r, t_data *data, t_light *l)
 
 static double	get_specular_dot(t_ray *l, double dot, t_data *data)
 {
-	double	longueur;
-	t_ray r;
+	double		longueur;
+	t_ray		r;
 
 	r.x = 2.0f * dot * data->object_norme->x - l->x;
 	r.y = 2.0f * dot * data->object_norme->y - l->y;
@@ -65,7 +65,7 @@ int				while_light(int *rgb, t_ray *light_ray, t_data *data)
 {
 	double		dot;
 	int			*color;
-	t_light			*light;
+	t_light		*light;
 
 	light = data->light_head;
 	color = malloc(sizeof(int) * 3);
@@ -81,7 +81,8 @@ int				while_light(int *rgb, t_ray *light_ray, t_data *data)
 			dot = get_dot(data->object_norme, light_ray);
 			color = get_color(color, rgb, light, dot);
 			light_ray = init_ray_light_spec(light_ray, data, light);
-			color = get_color_specular(color, light->color, get_specular_dot(light_ray, dot, data));
+			dot = get_specular_dot(light_ray, dot, data);
+			color = get_color_specular(color, light->color, dot);
 		}
 		light = light->next;
 	}
