@@ -6,7 +6,7 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 17:03:41 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/03/13 14:37:05 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/04/27 13:51:21 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static int	get_pos(char *s, t_light *light)
 	light->x = ft_atof(tab[0]);
 	light->y = ft_atof(tab[1]);
 	light->z = ft_atof(tab[2]);
-	printf("%f %f %f\n", light->x, light->y, light->z);
 	free(tab[0]);
 	free(tab[1]);
 	free(tab[2]);

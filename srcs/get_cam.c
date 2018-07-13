@@ -6,7 +6,7 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 17:21:55 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/03/21 11:50:47 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/04/11 15:07:00 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ static int		get_pos(char *s, t_cam *cam)
 	tab = ft_strsplit(s, ',');
 	if (!tab || !tab[0] || !tab[1] || !tab[2])
 		return (-1);
-	cam->camx = (double)ft_getnbr(tab[0]) / 10;
-	cam->camy = (double)ft_getnbr(tab[1]) / 10;
-	cam->camz = (double)ft_getnbr(tab[2]) / 10;
+	cam->camx = ft_getnbr(tab[0]);
+	cam->camy = ft_getnbr(tab[1]);
+	cam->camz = ft_getnbr(tab[2]);
 	free(tab[0]);
 	free(tab[1]);
 	free(tab[2]);
