@@ -2,7 +2,9 @@
 [cam]
 pos:0.0,0.0,0;dir:0,0,-1
 [light]
-pos:-1,0,-4;coef:0.5;color:255,255,255
+pos:-1,4,-1;coef:0.4;color:255,255,255
+[light]
+pos:1,4,-1;coef:0.4;color:255,255,255
 #####
 #PLAN
 #####
@@ -12,10 +14,12 @@ pos:0.2,-0.2,-5;dir:0,1,0;color:274,19,159
 #CYLINDRE
 #########
 [cylindre]
-pos:-0.2,0.0,-6;dir:0,1,0;rad:0.1;color:0,255,255
+pos:1,0,-3;dir:0,1,0;rad:2;color:0,255,255
 [cylindre]
-pos:0.2,0.0,-6;dir:0,1,0;rad:0.1;color:0,255,255
+pos:-1,0,-3;dir:0,1,0;rad:2;color:0,255,0
 [cylindre]
-pos:0.5,0.0,-4;dir:0,1,0;rad:0.1;color:0,0,255
+pos:-2,0,-4;dir:0,1,0;rad:2;color:255,255,255
 [cylindre]
-pos:-0.5,0.0,-4;dir:0,1,0;rad:0.1;color:0,0,255
+pos:2,0,-4;dir:0,1,0;rad:2;color:255,0,255
+[cylindre]
+pos:0,0,-4;dir:0,1,0;rad:2;color:255,255,0
