@@ -6,7 +6,7 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 17:08:14 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/04/27 15:13:01 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/07/13 13:01:36 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,16 +60,6 @@ typedef struct			s_cam
 	int					is_init;
 }						t_cam;
 
-
-typedef struct			s_quater
-{
-	double				w;
-	double				x;
-	double				y;
-	double				z;
-}						t_quater;
-
-
 typedef struct			s_light
 {
 	int					color[3];
@@ -103,7 +93,6 @@ typedef struct			s_cylindre
 	double				rot;
 	double				ang;
 	struct s_cylindre	*next;
-	struct s_quater		*quat;
 }						t_cylindre;
 
 typedef struct			s_cone
@@ -118,7 +107,6 @@ typedef struct			s_cone
 	double				ang;
 	double				rot;
 	struct s_cone		*next;
-	struct s_quater		*quat;
 }						t_cone;
 
 typedef struct			s_plan

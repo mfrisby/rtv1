@@ -6,7 +6,7 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 17:28:45 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/04/27 16:34:49 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/07/13 13:02:34 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,5 @@ t_cylindre		*get_cylindre(char *s)
 		i++;
 	}
 	free(tab);
-	get_rotation(cylindre, NULL);
 	return (cylindre);
 }

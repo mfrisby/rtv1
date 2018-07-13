@@ -6,7 +6,7 @@
 /*   By: mfrisby <mfrisby@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 17:27:20 by mfrisby           #+#    #+#             */
-/*   Updated: 2018/04/27 16:27:45 by mfrisby          ###   ########.fr       */
+/*   Updated: 2018/07/13 13:02:33 by mfrisby          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ static int		get_pos(char *s, t_cone *cone)
 	tab = ft_strsplit(s, ',');
 	if (!tab || !tab[0] || !tab[1] || !tab[2])
 		return (-1);
-	cone->x = ft_atof(tab[0]);
-	cone->y = ft_atof(tab[1]);
-	cone->z = ft_atof(tab[2]);
+	cone->x = ft_getnbr(tab[0]);
+	cone->y = ft_getnbr(tab[1]);
+	cone->z = ft_getnbr(tab[2]);
 	free(tab[0]);
 	free(tab[1]);
 	free(tab[2]);
@@ -36,9 +36,9 @@ static int		get_dir(char *s, t_cone *cone)
 	tab = ft_strsplit(s, ',');
 	if (!tab || !tab[0] || !tab[1] || !tab[2])
 		return (-1);
-	cone->dirx = ft_atof(tab[0]);
-	cone->diry = ft_atof(tab[1]);
-	cone->dirz = ft_atof(tab[2]);
+	cone->dirx = ft_getnbr(tab[0]);
+	cone->diry = ft_getnbr(tab[1]);
+	cone->dirz = ft_getnbr(tab[2]);
 	free(tab[0]);
 	free(tab[1]);
 	free(tab[2]);
@@ -115,6 +115,5 @@ t_cone			*get_cone(char *s)
 		i++;
 	}
 	free(tab);
-	get_rotation(NULL, cone);
 	return (cone);
 }
